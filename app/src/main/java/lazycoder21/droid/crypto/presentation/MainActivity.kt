@@ -1,7 +1,8 @@
-package lazycoder21.droid.crypto
+package lazycoder21.droid.crypto.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import lazycoder21.droid.crypto.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
