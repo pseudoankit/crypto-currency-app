@@ -11,7 +11,13 @@ import lazycoder21.droid.crypto.R
 class CryptoDetailFragment : Fragment() {
 
     companion object {
-        fun newInstance() = CryptoDetailFragment()
+        fun newInstance(symbol: String) = CryptoDetailFragment().apply {
+            arguments = Bundle().also {
+                it.putString(ARG_SYMBOL, symbol)
+            }
+        }
+
+        private const val ARG_SYMBOL = "symbol"
     }
 
     private lateinit var viewModel: CryptoDetailViewModel
@@ -23,10 +29,5 @@ class CryptoDetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_crypto_detail, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CryptoDetailViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }

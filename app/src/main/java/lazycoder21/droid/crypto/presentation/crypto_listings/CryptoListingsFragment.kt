@@ -23,10 +23,6 @@ class CryptoListingsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_crypto_listings, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CryptoListingsViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
 
 }
