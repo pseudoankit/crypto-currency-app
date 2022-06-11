@@ -10,6 +10,6 @@ class CryptoListingsViewModel @Inject constructor(
     private val cryptoRepository: CryptoRepository,
 ) : ViewModel() {
 
-    fun listings(symbol: String) = cryptoRepository.getCryptoListings(symbol)
+    fun listings(symbol: String = "") = cryptoRepository.getCryptoListings(symbol)
 
 }

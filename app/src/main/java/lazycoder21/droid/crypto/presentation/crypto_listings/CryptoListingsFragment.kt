@@ -1,16 +1,13 @@
 package lazycoder21.droid.crypto.presentation.crypto_listings
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import lazycoder21.droid.crypto.R
 import lazycoder21.droid.crypto.databinding.FragmentCryptoListingsBinding
 import lazycoder21.droid.crypto.presentation.base.BaseFragment
+import lazycoder21.droid.crypto.utils.Utils.fastLazy
 
 @AndroidEntryPoint
 class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
@@ -20,16 +17,20 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
     }
 
     private val viewModel: CryptoListingsViewModel by viewModels()
+    private val adapter by fastLazy {
+        CryptoListingAdapter()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initObserver()
+
     }
 
     private fun initObserver() {
-        viewModel.listings("").observe(viewLifecycleOwner) {
-
+        viewModel.listings().observe(viewLifecycleOwner) {
+            adapter.submitList(it)
         }
     }
 
