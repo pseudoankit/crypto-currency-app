@@ -2,6 +2,8 @@ package lazycoder21.droid.crypto.utils
 
 import android.content.Context
 import android.text.style.ForegroundColorSpan
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -10,7 +12,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+
 object Utils {
+
+    val View.hide get() = run { visibility = View.GONE }
+    val View.show get() = run { visibility = View.VISIBLE }
+
     val Fragment.mTag: String? get() = javaClass.canonicalName
 
     fun <T> fastLazy(block: () -> T) = lazy(LazyThreadSafetyMode.NONE, block)
@@ -33,4 +40,16 @@ object Utils {
 
         }
     }
+
+    val View.hasFocus: Boolean
+        get() = run {
+            val view = this
+            if (view.isFocused) return true
+            if (view is ViewGroup) {
+                for (i in 0 until view.childCount) {
+                    if (view.getChildAt(i).hasFocus) return true
+                }
+            }
+            return false
+        }
 }

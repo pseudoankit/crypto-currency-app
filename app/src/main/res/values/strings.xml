@@ -2,4 +2,6 @@
     <string name="app_name">Crypto</string>
     <string name="crypto_search_hint">Search Crypto</string>
     <string name="search">search</string>
+    <string name="options">options</string>
+    <string name="sort">sort</string>
 </resources>

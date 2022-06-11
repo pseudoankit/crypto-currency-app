@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     fun openDetailFragment(symbol: String) {
@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-
         super.onBackPressed()
     }
 }
