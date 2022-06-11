@@ -1,6 +1,7 @@
-package lazycoder21.droid.crypto.presentation
+package lazycoder21.droid.crypto.presentation.main
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -11,9 +12,14 @@ import lazycoder21.droid.crypto.utils.Utils.mTag
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        viewModel.sync()
 
         addFragment(CryptoListingsFragment.newInstance(), false)
 

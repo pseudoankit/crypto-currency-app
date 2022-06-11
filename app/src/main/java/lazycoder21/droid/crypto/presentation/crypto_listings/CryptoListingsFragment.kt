@@ -24,13 +24,19 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initRecyclerView()
         initObserver()
-
     }
 
     private fun initObserver() {
         viewModel.listings().observe(viewLifecycleOwner) {
             adapter.submitList(it)
+        }
+    }
+
+    private fun initRecyclerView() {
+        binding.recyclerView.apply {
+            adapter = this@CryptoListingsFragment.adapter
         }
     }
 

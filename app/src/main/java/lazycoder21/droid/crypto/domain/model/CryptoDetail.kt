@@ -4,7 +4,7 @@ data class CryptoDetail(
     val volume: String? = null,
     val symbol: String? = null,
     val askPrice: String? = null,
-    val at: Int? = null,
+    val at: Long? = null,
     val lowPrice: String? = null,
     val highPrice: String? = null,
     val openPrice: String? = null,

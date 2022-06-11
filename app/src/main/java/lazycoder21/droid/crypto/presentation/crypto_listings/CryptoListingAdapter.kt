@@ -3,7 +3,7 @@ package lazycoder21.droid.crypto.presentation.crypto_listings
 import android.content.Context
 import android.text.Spannable
 import android.text.SpannedString
-import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.text.buildSpannedString
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import lazycoder21.droid.crypto.R
 import lazycoder21.droid.crypto.databinding.RvItemCryptoListingItemBinding
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
-import lazycoder21.droid.crypto.utils.Utils.mColor
+import lazycoder21.droid.crypto.utils.Utils.spanColor
 import java.util.*
 
 class CryptoListingAdapter :
@@ -34,15 +34,20 @@ class CryptoListingAdapter :
         }
 
         private fun buildSymbolConversionText(item: CryptoDetail, context: Context): SpannedString {
+            var start = 0
+            var end = 0
+            val flag = Spannable.SPAN_INCLUSIVE_INCLUSIVE
             return buildSpannedString {
+                start = length
                 append(item.baseAsset?.uppercase(Locale.ROOT))
-                setSpan(ForegroundColorSpan(context.mColor(R.color.white)), 0,
-                    this.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+                end = length
+                setSpan(context.spanColor(R.color.black), start, end, flag)
 
-                val stPoint = this.length
-                append("/{${item.quoteAsset}}")
-                setSpan(ForegroundColorSpan(context.mColor(R.color.sec_text_color)), stPoint,
-                    this.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+                start = length
+                append("/${item.quoteAsset}")
+                end = length
+                setSpan(context.spanColor(R.color.sec_text_color), start, end, flag)
+                setSpan(RelativeSizeSpan(.9f), start, end, flag)
             }
         }
     }

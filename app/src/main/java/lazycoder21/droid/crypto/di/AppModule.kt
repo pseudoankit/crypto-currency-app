@@ -9,7 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import lazycoder21.droid.crypto.data.local.LocalDataBase
 import lazycoder21.droid.crypto.data.remote.CryptoApi
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import javax.inject.Singleton
 
@@ -20,9 +20,11 @@ class AppModule {
     @Provides
     @Singleton
     fun provideCryptoApi(): CryptoApi {
-        return Retrofit.Builder().baseUrl(CryptoApi.BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create())
-            .build().create()
+        return Retrofit.Builder()
+            .baseUrl(CryptoApi.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create()
     }
 
     @Provides
