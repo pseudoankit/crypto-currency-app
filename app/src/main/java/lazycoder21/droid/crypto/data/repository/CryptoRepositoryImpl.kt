@@ -18,11 +18,11 @@ class CryptoRepositoryImpl @Inject constructor(
 
     private val dao = db.cryptoDao
 
-    override suspend fun getCryptoListings(symbol: String): LiveData<List<CryptoDetail>> {
+    override fun getCryptoListings(symbol: String): LiveData<List<CryptoDetail>> {
         return dao.getListings(symbol = symbol).map { it.mapToDomain }
     }
 
-    override suspend fun getCryptoDetail(symbol: String): LiveData<CryptoDetail> {
+    override fun getCryptoDetail(symbol: String): LiveData<CryptoDetail> {
         return dao.getDetail(symbol = symbol).map { it.mapToDomain }
     }
 

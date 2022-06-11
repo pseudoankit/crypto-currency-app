@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class CryptoDetailLocal(
-    @PrimaryKey val symbol: String? = null,
+    @PrimaryKey val symbol: String = "",
     val volume: String? = null,
     val askPrice: String? = null,
     val at: Int? = null,

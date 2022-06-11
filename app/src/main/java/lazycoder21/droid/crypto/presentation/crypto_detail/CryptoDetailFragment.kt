@@ -6,9 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import lazycoder21.droid.crypto.R
+import lazycoder21.droid.crypto.databinding.FragmentCryptoDetailBinding
+import lazycoder21.droid.crypto.presentation.base.BaseFragment
 
-class CryptoDetailFragment : Fragment() {
+@AndroidEntryPoint
+class CryptoDetailFragment : BaseFragment<FragmentCryptoDetailBinding>() {
 
     companion object {
         fun newInstance(symbol: String) = CryptoDetailFragment().apply {
@@ -20,14 +25,12 @@ class CryptoDetailFragment : Fragment() {
         private const val ARG_SYMBOL = "symbol"
     }
 
-    private lateinit var viewModel: CryptoDetailViewModel
+    private val viewModel: CryptoDetailViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        return inflater.inflate(R.layout.fragment_crypto_detail, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
-
+    override fun inflateLayout(layoutInflater: LayoutInflater) =
+        FragmentCryptoDetailBinding.inflate(layoutInflater)
 }

@@ -13,12 +13,12 @@ interface CryptoDao {
     @Query("""
         Select * from cryptodetaillocal WHERE Lower(symbol) Like '%' || Lower(:symbol) || '%'
     """)
-    suspend fun getListings(symbol: String = ""): LiveData<List<CryptoDetailLocal>>
+    fun getListings(symbol: String = ""): LiveData<List<CryptoDetailLocal>>
 
     @Query("""
         Select * from cryptodetaillocal Where Lower(symbol) = Lower(:symbol)
     """)
-    suspend fun getDetail(symbol: String): LiveData<CryptoDetailLocal>
+    fun getDetail(symbol: String): LiveData<CryptoDetailLocal>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertListings(list: List<CryptoDetailLocal>)
