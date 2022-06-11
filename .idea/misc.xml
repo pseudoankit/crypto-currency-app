@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../.gradle/caches/transforms-3/58a2640e68ab2f930c570828a4d3734d/transformed/appcompat-1.4.2/res/layout/abc_search_view.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/drawable/search_bar_background.xml" value="0.18425925925925926" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/fragment_crypto_listings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_cryto_detail.xml" value="0.2838541666666667" />
         <entry key="app/src/main/res/layout/rv_item_crypto_listing_item.xml" value="0.29791666666666666" />
+        <entry key="app/src/main/res/menu/menu_options.xml" value="0.29791666666666666" />
       </map>
     </option>
   </component>

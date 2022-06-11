@@ -20,8 +20,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         viewModel.sync()
+        init()
 
         addFragment(CryptoListingsFragment.newInstance(), false)
+    }
+
+    private fun init() {
 
     }
 
@@ -34,5 +38,10 @@ class MainActivity : AppCompatActivity() {
         if (addToBackStack) transaction.addToBackStack(fragment.mTag)
         transaction.add(R.id.fragment_container_view, fragment)
         transaction.commit()
+    }
+
+    override fun onBackPressed() {
+
+        super.onBackPressed()
     }
 }
