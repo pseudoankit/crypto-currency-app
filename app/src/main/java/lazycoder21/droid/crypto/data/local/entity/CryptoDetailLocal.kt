@@ -1,8 +1,12 @@
-package lazycoder21.droid.crypto.domain.model
+package lazycoder21.droid.crypto.data.local.entity
 
-data class CryptoDetail(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class CryptoDetailLocal(
+    @PrimaryKey val symbol: String? = null,
     val volume: String? = null,
-    val symbol: String? = null,
     val askPrice: String? = null,
     val at: Int? = null,
     val lowPrice: String? = null,
@@ -12,6 +16,5 @@ data class CryptoDetail(
     val quoteAsset: String? = null,
     val bidPrice: String? = null,
     val lastPrice: String? = null,
-    val id: Int? = null,
 )
 
