@@ -3,6 +3,7 @@ package lazycoder21.droid.crypto.presentation.crypto_listings
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.SearchView
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import lazycoder21.droid.crypto.databinding.FragmentCryptoListingsBinding
@@ -25,11 +26,26 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
+        setUpSearchBar()
         initObserver()
     }
 
+    private fun setUpSearchBar() {
+        binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(query: String): Boolean {
+                viewModel.fetchListings(query = query)
+                return true
+            }
+        })
+    }
+
     private fun initObserver() {
-        viewModel.listings().observe(viewLifecycleOwner) {
+        viewModel.fetchListings().observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
     }

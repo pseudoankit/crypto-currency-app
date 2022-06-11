@@ -13,7 +13,7 @@ object CryptoListingMapper {
         get() = run {
             CryptoDetail(
                 volume = volume,
-                symbol = symbol,
+                symbol = symbol ?: "",
                 askPrice = askPrice,
                 at = at,
                 lowPrice = lowPrice,
@@ -22,6 +22,7 @@ object CryptoListingMapper {
                 baseAsset = baseAsset,
                 quoteAsset = quoteAsset,
                 bidPrice = bidPrice,
+                lastPrice = lastPrice,
             )
         }
 
@@ -41,6 +42,7 @@ object CryptoListingMapper {
                 baseAsset = baseAsset,
                 quoteAsset = quoteAsset,
                 bidPrice = bidPrice,
+                lastPrice = lastPrice,
             )
         }
 
@@ -60,6 +62,7 @@ object CryptoListingMapper {
                 baseAsset = baseAsset,
                 quoteAsset = quoteAsset,
                 bidPrice = bidPrice,
+                lastPrice = lastPrice,
             )
         }
 }

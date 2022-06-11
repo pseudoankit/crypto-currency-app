@@ -2,6 +2,7 @@ package lazycoder21.droid.crypto.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
+import kotlinx.coroutines.flow.Flow
 import lazycoder21.droid.crypto.data.local.LocalDataBase
 import lazycoder21.droid.crypto.data.mapper.CryptoListingMapper.mapRemoteToLocal
 import lazycoder21.droid.crypto.data.mapper.CryptoListingMapper.mapToDomain
@@ -21,7 +22,7 @@ class CryptoRepositoryImpl @Inject constructor(
 
     private val dao = db.cryptoDao
 
-    override fun getCryptoListings(symbol: String): LiveData<List<CryptoDetail>> {
+    override fun getCryptoListings(symbol: String): Flow<List<CryptoDetail>> {
         return dao.getListings(symbol = symbol).map { it.mapToDomain }
     }
 

@@ -23,6 +23,7 @@ class CryptoListingAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: CryptoDetail) = with(binding) {
+            //todo
             val context = binding.root.context
             tvSymbolConv.text = buildSymbolConversionText(item, context)
             tvPrice.text = item.lastPrice

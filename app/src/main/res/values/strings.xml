@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Crypto</string>
+    <string name="crypto_search_hint">Search Crypto</string>
 </resources>
