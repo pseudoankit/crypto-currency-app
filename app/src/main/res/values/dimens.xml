@@ -9,4 +9,5 @@
     <dimen name="icon_size">20sp</dimen>
     <dimen name="action_bar_height">45dp</dimen>
     <dimen name="dp_1">1dp</dimen>
+    <dimen name="dp_50">50dp</dimen>
 </resources>

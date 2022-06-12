@@ -13,5 +13,6 @@ data class CryptoDetail(
     val bidPrice: String? = null,
     val lastPrice: String? = null,
     val id: Int? = null,
+    var favourite: Boolean = false,
 )
 

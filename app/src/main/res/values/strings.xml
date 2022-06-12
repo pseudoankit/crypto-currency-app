@@ -4,4 +4,6 @@
     <string name="search">search</string>
     <string name="options">options</string>
     <string name="sort">sort</string>
+    <string name="fas_back">\uf060</string>
+    <string name="fa_star">\uf005</string>
 </resources>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,6 +20,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_5"
+        android:text="@string/fas_back"
+        app:icon_type="fa_solid"
+        android:textColor="@color/black"
         android:padding="@dimen/dp_5"
         android:textSize="@dimen/icon_size"
         app:layout_constraintBottom_toBottomOf="@id/separator"
@@ -31,7 +34,7 @@
         tools:text="avax/inr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_5"
+        android:layout_marginStart="@dimen/dp_10"
         app:layout_constraintBottom_toBottomOf="@id/separator"
         app:layout_constraintStart_toEndOf="@id/btnBack"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,8 +43,9 @@
         android:id="@+id/btnFavourite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_5"
+        android:layout_marginStart="@dimen/dp_10"
         android:textSize="@dimen/icon_size"
+        android:text="@string/fa_star"
         app:layout_constraintBottom_toBottomOf="@id/separator"
         app:layout_constraintStart_toEndOf="@id/tvSymbolConv"
         app:layout_constraintTop_toTopOf="parent" />
@@ -66,4 +70,4 @@
         app:layout_constraintBottom_toBottomOf="@id/separator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-</merge>
+</androidx.constraintlayout.widget.ConstraintLayout>

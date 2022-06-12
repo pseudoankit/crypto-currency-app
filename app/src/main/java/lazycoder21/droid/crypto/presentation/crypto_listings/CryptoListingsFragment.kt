@@ -22,14 +22,14 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
 
     private val viewModel: CryptoListingsViewModel by viewModels()
     private val adapter by fastLazy {
-        CryptoListingAdapter(::itemClicked)
+        CryptoListingAdapter(::itemClicked, ::itemFavourite)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         init()
-        fetchListings()
+        fetchListings(query = viewModel.searchQuery)
     }
 
     private fun init() {
@@ -41,6 +41,10 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
         binding.recyclerView.apply {
             adapter = this@CryptoListingsFragment.adapter
         }
+    }
+
+    private fun itemFavourite(item: CryptoDetail) {
+        viewModel.favouriteCrypto(item)
     }
 
     private fun itemClicked(item: CryptoDetail) {
@@ -70,9 +74,6 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
         queryHint = resources.getString(R.string.crypto_search_hint)
         isSubmitButtonEnabled = true
         setOnQueryTextListener(searchBarListener())
-        setOnSearchClickListener {
-            this.setQuery(viewModel.searchQuery, false)
-        }
     }
 
     override fun inflateLayout(layoutInflater: LayoutInflater) =

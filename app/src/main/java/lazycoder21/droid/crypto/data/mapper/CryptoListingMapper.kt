@@ -23,6 +23,7 @@ object CryptoListingMapper {
                 quoteAsset = quoteAsset,
                 bidPrice = bidPrice,
                 lastPrice = lastPrice,
+                favourite = favourite
             )
         }
 
@@ -43,6 +44,7 @@ object CryptoListingMapper {
                 quoteAsset = quoteAsset,
                 bidPrice = bidPrice,
                 lastPrice = lastPrice,
+                favourite = favourite
             )
         }
 

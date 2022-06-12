@@ -16,5 +16,6 @@ data class CryptoDetailLocal(
     val quoteAsset: String? = null,
     val bidPrice: String? = null,
     val lastPrice: String? = null,
+    val favourite: Boolean = false,
 )
 

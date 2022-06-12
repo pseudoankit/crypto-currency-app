@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="stroke_color">#A39696</color>
+    <color name="star_selected">#C0DF11</color>
+    <color name="star_unselected">@color/white</color>
 </resources>
