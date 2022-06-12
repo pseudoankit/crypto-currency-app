@@ -2,6 +2,7 @@ package lazycoder21.droid.crypto.presentation.crypto_listings.pages
 
 import android.os.Bundle
 import android.view.*
+import android.widget.PopupMenu
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,6 +13,7 @@ import lazycoder21.droid.crypto.presentation.base.BaseFragment
 import lazycoder21.droid.crypto.presentation.crypto_listings.CryptoListingsViewModel
 import lazycoder21.droid.crypto.presentation.crypto_listings.adapter.CryptoListingAdapter
 import lazycoder21.droid.crypto.presentation.main.MainActivity
+import lazycoder21.droid.crypto.utils.SortOptions
 import lazycoder21.droid.crypto.utils.Utils.fastLazy
 
 @AndroidEntryPoint
@@ -40,6 +42,30 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
                 isRefreshing = false
             }
         }
+
+        btnSort.setOnClickListener {
+            showSortOptionMenu()
+        }
+    }
+
+    private fun showSortOptionMenu() {
+        PopupMenu(context, binding.btnSort).apply {
+            menuInflater.inflate(R.menu.menu_filter_options, menu)
+            setOnMenuItemClickListener {
+                adapter.submitList(
+                    viewModel.sort(
+                        adapter.currentList,
+                        when (it.itemId) {
+                            R.id.sortByAlphabetic -> SortOptions.ALPHABETIC
+                            R.id.sortByVolume -> SortOptions.VOLUME
+                            R.id.sortByPriceChange -> SortOptions.PRICE_CHANGE
+                            else -> 0
+                        }
+                    )
+                )
+                true
+            }
+        }.show()
     }
 
     private fun initRecyclerView() {

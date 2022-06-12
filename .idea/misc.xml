@@ -14,6 +14,7 @@
         <entry key="app/src/main/res/layout/fragment_cryto_detail.xml" value="0.2838541666666667" />
         <entry key="app/src/main/res/layout/rv_item_crypto_listing_item.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/text_view_price_change.xml" value="0.2833333333333333" />
+        <entry key="app/src/main/res/menu/menu_filter_options.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/menu/menu_options.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/menu/menu_options_details.xml" value="0.29791666666666666" />
       </map>

@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.core.text.buildSpannedString
 import lazycoder21.droid.crypto.R
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
+import lazycoder21.droid.crypto.domain.model.CryptoDetail.Companion.priceChange
 import lazycoder21.droid.crypto.utils.Utils.mColor
 import lazycoder21.droid.crypto.utils.Utils.spanColor
 import lostankit7.droid.customview.FontAwesomeIcon
@@ -14,10 +15,7 @@ import lostankit7.droid.utils.updateTypeface
 import java.util.*
 
 fun TextView.updatePriceChange(item: CryptoDetail) {
-    val default = 0f
-    val curr = item.lastPrice?.toFloatOrNull() ?: default
-    val open = item.openPrice?.toFloatOrNull() ?: default
-    val change = (curr - open) / open * 100
+    val change = item.priceChange
 
     text = String.format("%.2f", change) + "%"
     setBackgroundColor(context.mColor(if (change > 0) R.color.highlighted else R.color.red))
