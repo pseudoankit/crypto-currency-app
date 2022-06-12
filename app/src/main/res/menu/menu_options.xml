@@ -11,8 +11,8 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
     <item
-        android:id="@+id/menu_option"
+        android:id="@+id/menu_sort"
         android:iconTint="@color/white"
         app:showAsAction="collapseActionView"
-        android:title="@string/options" />
+        android:title="@string/sort" />
 </menu>

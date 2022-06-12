@@ -9,7 +9,6 @@ import lazycoder21.droid.crypto.R
 import lazycoder21.droid.crypto.databinding.FragmentCryptoListingsBinding
 import lazycoder21.droid.crypto.presentation.base.BaseFragment
 import lazycoder21.droid.crypto.utils.Utils.fastLazy
-import lazycoder21.droid.crypto.utils.Utils.hasFocus
 
 @AndroidEntryPoint
 class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
@@ -18,6 +17,7 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
         fun newInstance() = CryptoListingsFragment()
     }
 
+    private var searchViewExpanded = false
     private var searchView: SearchView? = null
     private val viewModel: CryptoListingsViewModel by viewModels()
     private val adapter by fastLazy {
@@ -49,7 +49,8 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
             }
 
             override fun onQueryTextChange(query: String): Boolean {
-                fetchListings(query)
+                if (searchViewExpanded)
+                    fetchListings(query)
                 return true
             }
         }
@@ -65,6 +66,10 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
         queryHint = resources.getString(R.string.crypto_search_hint)
         isSubmitButtonEnabled = true
         setOnQueryTextListener(searchBarListener())
+        setOnSearchClickListener {
+            searchViewExpanded = true
+            this.setQuery(viewModel.searchQuery, false)
+        }
 //        this.findViewById<ImageView>(R.id.search_go_btn)
     }
 
@@ -72,8 +77,11 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_options, menu)
 
-        searchView = (menu.findItem(R.id.menu_search)?.actionView as? SearchView)?.also {
-            setUpSearchView(it)
+        searchView = (menu.findItem(R.id.menu_search)?.actionView as? SearchView)?.apply {
+            setUpSearchView(this)
+        }
+        (menu.findItem(R.id.menu_sort))?.apply {
+            handleMenuOptionSort()
         }
     }
 
@@ -87,9 +95,18 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun handleMenuOptionSort() {
+
+    }
+
+    private fun closeSearchView() {
+        searchViewExpanded = false
+        searchView?.onActionViewCollapsed()
+    }
+
     private fun handleBackButton() {
-        if (searchView?.hasFocus == true) {
-            searchView?.onActionViewCollapsed()
+        if (searchViewExpanded) {
+            closeSearchView()
         }
     }
 
