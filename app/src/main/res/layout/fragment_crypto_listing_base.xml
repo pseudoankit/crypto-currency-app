@@ -8,13 +8,29 @@
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchBar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="@dimen/search_bar_height"
-        android:layout_margin="@dimen/dp_5"
+        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_5"
         android:background="@drawable/search_bar_background"
         app:iconifiedByDefault="false"
+        app:layout_constraintEnd_toStartOf="@id/btnSort"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:queryHint="@string/crypto_search_hint" />
+
+    <lostankit7.droid.customview.FontAwesomeIcon
+        android:id="@+id/btnSort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_5"
+        android:text="\uf0b0"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:icon_type="fa_solid"
+        app:layout_constraintBottom_toBottomOf="@id/searchBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/searchBar" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
