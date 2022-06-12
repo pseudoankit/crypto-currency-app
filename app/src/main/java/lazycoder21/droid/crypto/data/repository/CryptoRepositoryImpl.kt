@@ -3,6 +3,7 @@ package lazycoder21.droid.crypto.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import lazycoder21.droid.crypto.data.local.LocalDataBase
+import lazycoder21.droid.crypto.data.local.entity.CryptoDetailLocal
 import lazycoder21.droid.crypto.data.mapper.CryptoListingMapper.mapRemoteToLocal
 import lazycoder21.droid.crypto.data.mapper.CryptoListingMapper.mapToDomain
 import lazycoder21.droid.crypto.data.mapper.CryptoListingMapper.mapToLocal
@@ -30,7 +31,7 @@ class CryptoRepositoryImpl @Inject constructor(
     }
 
     override suspend fun insertListings(list: List<CryptoDetail>) {
-        dao.insertListings(list.mapToLocal)
+        _insertListings(list.mapToLocal)
     }
 
     override suspend fun syncListing() {
@@ -38,9 +39,13 @@ class CryptoRepositoryImpl @Inject constructor(
             val response = cryptoApi.getListings()
             val listings = response.body()?.mapRemoteToLocal
             if (response.isSuccessful && listings != null) {
-                dao.insertListings(listings)
+                _insertListings(listings)
             }
         }
+    }
+
+    private suspend fun _insertListings(list: List<CryptoDetailLocal>) {
+        dao.insertOrUpdate(list)
     }
 
     override suspend fun favouriteCrypto(item: CryptoDetail) {

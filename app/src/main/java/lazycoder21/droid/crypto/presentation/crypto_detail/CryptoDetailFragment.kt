@@ -48,6 +48,7 @@ class CryptoDetailFragment : BaseFragment<FragmentCryptoDetailBinding>() {
     private fun setActionBarData(cryptoDetail: CryptoDetail) = with(binding.actionBar) {
         btnBack.setOnClickListener { activity?.onBackPressed() }
         tvSymbolConv.text = context?.buildSymbolConversionText(cryptoDetail)
+        tvPrice.text = "₹${cryptoDetail.lastPrice}"
         btnFavourite.apply {
             updateFavouriteIcon(cryptoDetail)
             setOnClickListener {

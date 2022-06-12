@@ -1,6 +1,7 @@
 package lazycoder21.droid.crypto.data.mapper
 
 import lazycoder21.droid.crypto.data.local.entity.CryptoDetailLocal
+import lazycoder21.droid.crypto.data.local.entity.CryptoDetailPartial
 import lazycoder21.droid.crypto.data.remote.model.CryptoListingsRemote
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
 
@@ -24,6 +25,23 @@ object CryptoListingMapper {
                 bidPrice = bidPrice,
                 lastPrice = lastPrice,
                 favourite = favourite
+            )
+        }
+
+    val CryptoDetailLocal.mapPartial: CryptoDetailPartial
+        get() = run {
+            CryptoDetailPartial(
+                volume = volume,
+                symbol = symbol,
+                askPrice = askPrice,
+                at = at,
+                lowPrice = lowPrice,
+                highPrice = highPrice,
+                openPrice = openPrice,
+                baseAsset = baseAsset,
+                quoteAsset = quoteAsset,
+                bidPrice = bidPrice,
+                lastPrice = lastPrice,
             )
         }
 
