@@ -16,10 +16,11 @@ import lazycoder21.droid.crypto.domain.model.CryptoDetail
 import lazycoder21.droid.crypto.utils.Utils.spanColor
 import java.util.*
 
-class CryptoListingAdapter :
-    ListAdapter<CryptoDetail, CryptoListingAdapter.ViewHolder>(DiffCallback()) {
+class CryptoListingAdapter(
+    private val onItemClick: (CryptoDetail) -> Unit,
+) : ListAdapter<CryptoDetail, CryptoListingAdapter.ViewHolder>(DiffCallback()) {
 
-    class ViewHolder(private val binding: RvItemCryptoListingItemBinding) :
+    inner class ViewHolder(private val binding: RvItemCryptoListingItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: CryptoDetail) = with(binding) {
@@ -28,6 +29,9 @@ class CryptoListingAdapter :
             tvSymbolConv.text = buildSymbolConversionText(item, context)
             tvPrice.text = "₹${item.lastPrice}"
             tvPriceChange.text = calculatePriceChange(item)
+            itemView.setOnClickListener {
+                onItemClick.invoke(item)
+            }
         }
 
         private fun calculatePriceChange(item: CryptoDetail): String {

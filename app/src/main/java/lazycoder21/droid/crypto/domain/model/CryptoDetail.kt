@@ -2,7 +2,7 @@ package lazycoder21.droid.crypto.domain.model
 
 data class CryptoDetail(
     val volume: String? = null,
-    val symbol: String? = null,
+    val symbol: String = "",
     val askPrice: String? = null,
     val at: Long? = null,
     val lowPrice: String? = null,

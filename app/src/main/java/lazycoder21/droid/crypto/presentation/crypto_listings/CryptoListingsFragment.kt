@@ -7,21 +7,22 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import lazycoder21.droid.crypto.R
 import lazycoder21.droid.crypto.databinding.FragmentCryptoListingsBinding
+import lazycoder21.droid.crypto.domain.model.CryptoDetail
 import lazycoder21.droid.crypto.presentation.base.BaseFragment
+import lazycoder21.droid.crypto.presentation.main.MainActivity
 import lazycoder21.droid.crypto.utils.Utils.fastLazy
 
 @AndroidEntryPoint
 class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
 
     companion object {
+        const val TAG = "crypto_list"
         fun newInstance() = CryptoListingsFragment()
     }
 
-    private var searchViewExpanded = false
-    private var searchView: SearchView? = null
     private val viewModel: CryptoListingsViewModel by viewModels()
     private val adapter by fastLazy {
-        CryptoListingAdapter()
+        CryptoListingAdapter(::itemClicked)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,7 +33,7 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
     }
 
     private fun init() {
-        setHasOptionsMenu(true)
+        setUpSearchView(binding.searchBar)
         initRecyclerView()
     }
 
@@ -42,6 +43,10 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
         }
     }
 
+    private fun itemClicked(item: CryptoDetail) {
+        (activity as? MainActivity)?.navigateToDetailScreen(item.symbol)
+    }
+
     private fun searchBarListener(): SearchView.OnQueryTextListener {
         return object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -49,8 +54,7 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
             }
 
             override fun onQueryTextChange(query: String): Boolean {
-                if (searchViewExpanded)
-                    fetchListings(query)
+                fetchListings(query)
                 return true
             }
         }
@@ -67,46 +71,7 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
         isSubmitButtonEnabled = true
         setOnQueryTextListener(searchBarListener())
         setOnSearchClickListener {
-            searchViewExpanded = true
             this.setQuery(viewModel.searchQuery, false)
-        }
-//        this.findViewById<ImageView>(R.id.search_go_btn)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_options, menu)
-
-        searchView = (menu.findItem(R.id.menu_search)?.actionView as? SearchView)?.apply {
-            setUpSearchView(this)
-        }
-        (menu.findItem(R.id.menu_sort))?.apply {
-            handleMenuOptionSort()
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                handleBackButton()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun handleMenuOptionSort() {
-
-    }
-
-    private fun closeSearchView() {
-        searchViewExpanded = false
-        searchView?.onActionViewCollapsed()
-    }
-
-    private fun handleBackButton() {
-        if (searchViewExpanded) {
-            closeSearchView()
         }
     }
 

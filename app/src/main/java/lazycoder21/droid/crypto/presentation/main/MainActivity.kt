@@ -8,7 +8,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import lazycoder21.droid.crypto.R
 import lazycoder21.droid.crypto.presentation.crypto_detail.CryptoDetailFragment
 import lazycoder21.droid.crypto.presentation.crypto_listings.CryptoListingsFragment
-import lazycoder21.droid.crypto.utils.Utils.mTag
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -19,28 +18,34 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        addFragment(
+            CryptoListingsFragment.newInstance(),
+            false,
+            tag = CryptoListingsFragment.TAG
+        )
+
+        syncData()
+    }
+
+    private fun syncData() {
         viewModel.sync()
-        init()
-
-        addFragment(CryptoListingsFragment.newInstance(), false)
     }
 
-    private fun init() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    fun openDetailFragment(symbol: String) {
-        addFragment(CryptoDetailFragment.newInstance(symbol))
-    }
-
-    private fun addFragment(fragment: Fragment, addToBackStack: Boolean = true) {
+    private fun addFragment(
+        fragment: Fragment,
+        addToBackStack: Boolean = true,
+        tag: String? = null,
+    ) {
         val transaction = supportFragmentManager.beginTransaction()
-        if (addToBackStack) transaction.addToBackStack(fragment.mTag)
-        transaction.add(R.id.fragment_container_view, fragment)
+        if (addToBackStack) transaction.addToBackStack(tag)
+        transaction.add(R.id.fragment_container_view, fragment, tag)
         transaction.commit()
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
+    fun navigateToDetailScreen(symbol: String) {
+        addFragment(
+            fragment = CryptoDetailFragment.newInstance(symbol),
+            tag = CryptoDetailFragment.TAG
+        )
     }
 }

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,8 +16,6 @@ object Utils {
 
     val View.hide get() = run { visibility = View.GONE }
     val View.show get() = run { visibility = View.VISIBLE }
-
-    val Fragment.mTag: String? get() = javaClass.canonicalName
 
     fun <T> fastLazy(block: () -> T) = lazy(LazyThreadSafetyMode.NONE, block)
 

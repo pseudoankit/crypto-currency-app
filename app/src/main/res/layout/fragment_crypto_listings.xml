@@ -8,11 +8,10 @@
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchBar"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/search_bar_height"
-        app:iconifiedByDefault="false"
         android:background="@drawable/search_bar_background"
+        app:iconifiedByDefault="false"
         app:layout_constraintTop_toTopOf="parent"
         app:queryHint="@string/crypto_search_hint" />
 
