@@ -35,6 +35,16 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
     private fun init() {
         setUpSearchView(binding.searchBar)
         initRecyclerView()
+        initListener()
+    }
+
+    private fun initListener() = with(binding) {
+        swipeRefreshLayout.apply {
+            setOnRefreshListener {
+                viewModel.syncData()
+                isRefreshing = false
+            }
+        }
     }
 
     private fun initRecyclerView() {

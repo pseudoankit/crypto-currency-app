@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import lazycoder21.droid.crypto.databinding.RvItemCryptoListingItemBinding
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
-import lazycoder21.droid.crypto.utils.Utils.buildSymbolConversionText
-import lazycoder21.droid.crypto.utils.Utils.updateFavouriteIcon
+import lazycoder21.droid.crypto.utils.buildSymbolConversionText
+import lazycoder21.droid.crypto.utils.updateFavouriteIcon
+import lazycoder21.droid.crypto.utils.updatePriceChange
 
 class CryptoListingAdapter(
     private val onItemClick: (CryptoDetail) -> Unit,
@@ -20,10 +21,9 @@ class CryptoListingAdapter(
 
         fun bind(item: CryptoDetail) = with(binding) {
             //todo
-            val context = binding.root.context
-            tvSymbolConv.text = context.buildSymbolConversionText(item)
+            tvSymbolConv.buildSymbolConversionText(item)
             tvPrice.text = "₹${item.lastPrice}"
-            tvPriceChange.text = calculatePriceChange(item)
+            tvPriceChange.updatePriceChange(item)
             itemView.setOnClickListener {
                 onItemClick.invoke(item)
             }
@@ -33,10 +33,6 @@ class CryptoListingAdapter(
                     itemFavourite.invoke(item)
                 }
             }
-        }
-
-        private fun calculatePriceChange(item: CryptoDetail): String {
-            return ""
         }
     }
 

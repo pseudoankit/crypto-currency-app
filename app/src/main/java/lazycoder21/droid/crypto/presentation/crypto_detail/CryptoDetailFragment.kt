@@ -8,8 +8,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import lazycoder21.droid.crypto.databinding.FragmentCryptoDetailBinding
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
 import lazycoder21.droid.crypto.presentation.base.BaseFragment
-import lazycoder21.droid.crypto.utils.Utils.buildSymbolConversionText
-import lazycoder21.droid.crypto.utils.Utils.updateFavouriteIcon
+import lazycoder21.droid.crypto.utils.buildSymbolConversionText
+import lazycoder21.droid.crypto.utils.updateFavouriteIcon
 
 @AndroidEntryPoint
 class CryptoDetailFragment : BaseFragment<FragmentCryptoDetailBinding>() {
@@ -47,7 +47,7 @@ class CryptoDetailFragment : BaseFragment<FragmentCryptoDetailBinding>() {
 
     private fun setActionBarData(cryptoDetail: CryptoDetail) = with(binding.actionBar) {
         btnBack.setOnClickListener { activity?.onBackPressed() }
-        tvSymbolConv.text = context?.buildSymbolConversionText(cryptoDetail)
+        tvSymbolConv.buildSymbolConversionText(cryptoDetail)
         tvPrice.text = "₹${cryptoDetail.lastPrice}"
         btnFavourite.apply {
             updateFavouriteIcon(cryptoDetail)

@@ -64,9 +64,8 @@
     <TextView
         android:id="@+id/tvPriceChange"
         tools:text="+90%"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/dp_5"
+        style="@style/stylePriceChange"
         app:layout_constraintBottom_toBottomOf="@id/separator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

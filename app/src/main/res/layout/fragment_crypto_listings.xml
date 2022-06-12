@@ -9,20 +9,28 @@
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchBar"
         android:layout_width="match_parent"
-        android:layout_margin="@dimen/dp_5"
         android:layout_height="@dimen/search_bar_height"
+        android:layout_margin="@dimen/dp_5"
         android:background="@drawable/search_bar_background"
         app:iconifiedByDefault="false"
         app:layout_constraintTop_toTopOf="parent"
         app:queryHint="@string/crypto_search_hint" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchBar"
-        tools:itemCount="4"
-        tools:listitem="@layout/rv_item_crypto_listing_item" />
+        app:layout_constraintTop_toBottomOf="@id/searchBar">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchBar"
+            tools:itemCount="4"
+            tools:listitem="@layout/rv_item_crypto_listing_item" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

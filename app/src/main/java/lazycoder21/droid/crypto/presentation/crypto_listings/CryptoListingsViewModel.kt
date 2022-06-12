@@ -27,4 +27,10 @@ class CryptoListingsViewModel @Inject constructor(
         cryptoRepository.favouriteCrypto(item)
     }
 
+    fun syncData() {
+        viewModelScope.launchIO {
+            cryptoRepository.syncListing()
+        }
+    }
+
 }
