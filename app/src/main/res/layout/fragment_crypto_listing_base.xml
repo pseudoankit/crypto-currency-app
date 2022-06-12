@@ -49,4 +49,15 @@
             tools:itemCount="4"
             tools:listitem="@layout/rv_item_crypto_listing_item" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/scrollToTop"
+        android:layout_width="wrap_content"
+        android:src="@android:drawable/arrow_up_float"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10"
+        android:backgroundTint="@color/white"
+        android:contentDescription="scroll to top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

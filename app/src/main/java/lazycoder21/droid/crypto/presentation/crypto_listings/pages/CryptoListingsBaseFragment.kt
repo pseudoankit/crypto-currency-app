@@ -72,6 +72,9 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
         binding.recyclerView.apply {
             adapter = this@CryptoListingsBaseFragment.adapter
         }
+        binding.scrollToTop.setOnClickListener {
+            binding.recyclerView.smoothScrollToPosition(0)
+        }
     }
 
     private fun itemFavourite(item: CryptoDetail) {
