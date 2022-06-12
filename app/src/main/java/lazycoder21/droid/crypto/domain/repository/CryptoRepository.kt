@@ -9,4 +9,5 @@ interface CryptoRepository {
     suspend fun insertListings(list: List<CryptoDetail>)
     suspend fun syncListing()
     suspend fun favouriteCrypto(item: CryptoDetail)
+    fun getFavouriteCryptoListings(query: String = ""): LiveData<List<CryptoDetail>>
 }

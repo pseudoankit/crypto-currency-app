@@ -52,4 +52,8 @@ class CryptoRepositoryImpl @Inject constructor(
         item.favourite = !item.favourite
         dao.update(item = item.mapToLocal)
     }
+
+    override fun getFavouriteCryptoListings(query: String): LiveData<List<CryptoDetail>> {
+        return dao.getFavouriteListings(query).map { it.mapToDomain }
+    }
 }

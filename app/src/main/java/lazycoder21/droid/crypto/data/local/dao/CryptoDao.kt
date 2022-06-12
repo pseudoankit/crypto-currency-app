@@ -15,6 +15,11 @@ interface CryptoDao {
     fun getListings(symbol: String = ""): LiveData<List<CryptoDetailLocal>>
 
     @Query("""
+        Select * from cryptodetaillocal WHERE (Lower(symbol) Like '%' || Lower(:symbol) || '%') and (favourite = 1)
+    """)
+    fun getFavouriteListings(symbol: String = ""): LiveData<List<CryptoDetailLocal>>
+
+    @Query("""
         Select * from cryptodetaillocal Where Lower(symbol) = Lower(:symbol)
     """)
     fun getDetail(symbol: String): LiveData<CryptoDetailLocal>

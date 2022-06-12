@@ -1,4 +1,4 @@
-package lazycoder21.droid.crypto.presentation.crypto_listings
+package lazycoder21.droid.crypto.presentation.crypto_listings.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -14,12 +14,19 @@ class CryptoListingsViewModel @Inject constructor(
     private val cryptoRepository: CryptoRepository,
 ) : ViewModel() {
 
-    var searchQuery = ""
+    var allTabSearchQuery = ""
+        private set
+    var favouriteSearchQuery = ""
         private set
 
-    fun fetchListings(query: String = ""): LiveData<List<CryptoDetail>> {
+    fun fetchFavouriteListings(query: String = ""): LiveData<List<CryptoDetail>> {
+        favouriteSearchQuery = query
+        return cryptoRepository.getFavouriteCryptoListings(query)
+    }
+
+    fun fetchAllListings(query: String = ""): LiveData<List<CryptoDetail>> {
         //todo transformation
-        searchQuery = query
+        allTabSearchQuery = query
         return cryptoRepository.getCryptoListings(query)
     }
 

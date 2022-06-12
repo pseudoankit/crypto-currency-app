@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         addFragment(
-            CryptoListingsFragment.newInstance(),
+            CryptoListingsFragment(),
             false,
             tag = CryptoListingsFragment.TAG
         )
