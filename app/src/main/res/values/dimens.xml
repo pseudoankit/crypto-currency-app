@@ -5,4 +5,5 @@
     <dimen name="search_bar_height">50dp</dimen>
     <dimen name="stroke_width">1dp</dimen>
     <dimen name="corner_radius">8dp</dimen>
+    <dimen name="ts_crypto_price">12sp</dimen>
 </resources>

@@ -26,7 +26,7 @@ class CryptoListingAdapter :
             //todo
             val context = binding.root.context
             tvSymbolConv.text = buildSymbolConversionText(item, context)
-            tvPrice.text = item.lastPrice
+            tvPrice.text = "₹${item.lastPrice}"
             tvPriceChange.text = calculatePriceChange(item)
         }
 
