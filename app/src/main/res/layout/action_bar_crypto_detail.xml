@@ -66,6 +66,7 @@
         tools:text="+90%"
         android:layout_height="wrap_content"
         style="@style/stylePriceChange"
+        android:layout_marginEnd="@dimen/dp_5"
         app:layout_constraintBottom_toBottomOf="@id/separator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -10,6 +10,7 @@ import lazycoder21.droid.crypto.domain.model.CryptoDetail
 import lazycoder21.droid.crypto.presentation.base.BaseFragment
 import lazycoder21.droid.crypto.utils.buildSymbolConversionText
 import lazycoder21.droid.crypto.utils.updateFavouriteIcon
+import lazycoder21.droid.crypto.utils.updatePriceChange
 
 @AndroidEntryPoint
 class CryptoDetailFragment : BaseFragment<FragmentCryptoDetailBinding>() {
@@ -55,6 +56,7 @@ class CryptoDetailFragment : BaseFragment<FragmentCryptoDetailBinding>() {
                 viewModel.favouriteCrypto(cryptoDetail)
             }
         }
+        tvPriceChange.updatePriceChange(cryptoDetail)
     }
 
     override fun inflateLayout(layoutInflater: LayoutInflater) =

@@ -8,7 +8,7 @@
         <entry key="app/src/main/res/layout/action_bar_crypto_detail.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/fragment_crypto_detail.xml" value="0.29791666666666666" />
-        <entry key="app/src/main/res/layout/fragment_crypto_listings.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_crypto_listings.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_cryto_detail.xml" value="0.2838541666666667" />
         <entry key="app/src/main/res/layout/rv_item_crypto_listing_item.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/text_view_price_change.xml" value="0.2833333333333333" />
