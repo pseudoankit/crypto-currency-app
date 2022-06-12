@@ -6,4 +6,7 @@
     <dimen name="stroke_width">1dp</dimen>
     <dimen name="corner_radius">8dp</dimen>
     <dimen name="ts_crypto_price">12sp</dimen>
+    <dimen name="icon_size">20sp</dimen>
+    <dimen name="action_bar_height">45dp</dimen>
+    <dimen name="dp_1">1dp</dimen>
 </resources>

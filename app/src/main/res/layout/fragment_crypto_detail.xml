@@ -5,5 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".presentation.crypto_detail.CryptoDetailFragment">
 
+    <include layout="@layout/action_bar_crypto_detail" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
