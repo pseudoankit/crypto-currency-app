@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.jjoe64.graphview.series.DataPoint
+import com.jjoe64.graphview.series.LineGraphSeries
 import dagger.hilt.android.AndroidEntryPoint
 import lazycoder21.droid.crypto.databinding.FragmentCryptoDetailBinding
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
@@ -38,6 +40,19 @@ class CryptoDetailFragment : BaseFragment<FragmentCryptoDetailBinding>() {
     private fun init() {
         val symbol = arguments?.getString(ARG_SYMBOL) ?: return
         viewModel.symbol = symbol
+        drawGraph()
+    }
+
+    private fun drawGraph() = with(binding.graph) {
+        //todo change data with actual one
+        val series = LineGraphSeries(arrayOf(
+            DataPoint(0.0, 1.0),
+            DataPoint(1.0, 3.0),
+            DataPoint(2.0, 4.0),
+            DataPoint(3.0, 9.0),
+            DataPoint(5.0, 11.0),
+        ))
+        addSeries(series)
     }
 
     private fun initObserver() {
