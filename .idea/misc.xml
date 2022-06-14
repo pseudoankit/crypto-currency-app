@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable/search_bar_background.xml" value="0.18425925925925926" />
         <entry key="app/src/main/res/layout/action_bar_crypto_detail.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29791666666666666" />
+        <entry key="app/src/main/res/layout/filter_crypto_listings.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/fragment_crypot_listing_base.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/layout/fragment_crypto_detail.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/fragment_crypto_listing_base.xml" value="0.25" />
