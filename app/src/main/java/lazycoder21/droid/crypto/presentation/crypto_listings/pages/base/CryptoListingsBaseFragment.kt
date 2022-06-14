@@ -1,28 +1,24 @@
-package lazycoder21.droid.crypto.presentation.crypto_listings.pages
+package lazycoder21.droid.crypto.presentation.crypto_listings.pages.base
 
 import android.os.Bundle
 import android.view.*
 import android.widget.PopupMenu
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.viewModels
-import dagger.hilt.android.AndroidEntryPoint
 import lazycoder21.droid.crypto.R
 import lazycoder21.droid.crypto.databinding.FragmentCryptoListingBaseBinding
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
 import lazycoder21.droid.crypto.presentation.base.BaseFragment
-import lazycoder21.droid.crypto.presentation.crypto_listings.CryptoListingsViewModel
 import lazycoder21.droid.crypto.presentation.crypto_listings.adapter.CryptoListingAdapter
 import lazycoder21.droid.crypto.presentation.main.MainActivity
 import lazycoder21.droid.crypto.utils.SortOptions
 import lazycoder21.droid.crypto.utils.Utils.fastLazy
 
-@AndroidEntryPoint
 abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBaseBinding>() {
 
-    val viewModel: CryptoListingsViewModel by viewModels()
-    val adapter by fastLazy {
-        CryptoListingAdapter(::itemClicked, ::itemFavourite)
-    }
+    private val viewModel: CryptoListingsBaseViewModel by fastLazy { provideViewModel() }
+
+    val adapter by fastLazy { CryptoListingAdapter(::itemClicked, ::itemFavourite) }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,6 +29,7 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
         setUpSearchView(binding.searchBar)
         initRecyclerView()
         initListener()
+        searchQueryChanged()
     }
 
     private fun initListener() = with(binding) {
@@ -85,6 +82,12 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
         (activity as? MainActivity)?.navigateToDetailScreen(item.symbol)
     }
 
+    private fun setUpSearchView(searchView: SearchView) = with(searchView) {
+        queryHint = resources.getString(R.string.crypto_search_hint)
+        isSubmitButtonEnabled = false
+        setOnQueryTextListener(searchBarListener())
+    }
+
     private fun searchBarListener(): SearchView.OnQueryTextListener {
         return object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -92,21 +95,17 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
             }
 
             override fun onQueryTextChange(query: String): Boolean {
-                searchQueryChanged(query)
+                viewModel.query = query
+                searchQueryChanged()
                 return true
             }
         }
     }
 
-    private fun setUpSearchView(searchView: SearchView) = with(searchView) {
-        queryHint = resources.getString(R.string.crypto_search_hint)
-        isSubmitButtonEnabled = true
-        setOnQueryTextListener(searchBarListener())
-    }
-
     override fun inflateLayout(layoutInflater: LayoutInflater) =
         FragmentCryptoListingBaseBinding.inflate(layoutInflater)
 
-    abstract fun searchQueryChanged(query: String)
+    abstract fun searchQueryChanged()
 
+    abstract fun provideViewModel(): CryptoListingsBaseViewModel
 }
