@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.22037037037037038" />
         <entry key="../../../.gradle/caches/transforms-3/58a2640e68ab2f930c570828a4d3734d/transformed/appcompat-1.4.2/res/layout/abc_search_view.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/drawable/search_bar_background.xml" value="0.18425925925925926" />
         <entry key="app/src/main/res/layout/action_bar_crypto_detail.xml" value="0.29791666666666666" />
