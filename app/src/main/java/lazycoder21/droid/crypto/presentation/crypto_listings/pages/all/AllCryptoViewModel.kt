@@ -14,11 +14,9 @@ class AllCryptoViewModel @Inject constructor(
     private val cryptoRepository: CryptoRepository,
 ) : CryptoListingsBaseViewModel(cryptoRepository) {
 
-    fun fetchAllListings(): LiveData<List<CryptoDetail>> {
-        //todo transformation
-        return cryptoRepository.getCryptoListings(query).map {
+    override val fetchCryptoListings: LiveData<List<CryptoDetail>>
+        get() = cryptoRepository.getCryptoListings(searchQuery).map {
             it.sort(sortOptions)
         }
-    }
 
 }

@@ -22,7 +22,7 @@ class FilterView @JvmOverloads constructor(
 
     var iconCTA: ((@SortOrder Int) -> Unit)? = null
 
-    private var filterParams = FilterParams("")
+    private var filterParams = FilterParams.default
     private var icon: FontAwesomeIcon? = null
     private var textView: TextView? = null
 
@@ -107,9 +107,14 @@ class FilterView @JvmOverloads constructor(
 
     data class FilterParams(
         var filterName: String,
-        var ascIcon: String? = null,
-        var descIcon: String? = null,
-    )
+        var ascIcon: String,
+        var descIcon: String,
+    ) {
+        companion object {
+            val default
+                get() = FilterParams("", DEF_ASC_ICON, DEF_DESC_ICON)
+        }
+    }
 
     companion object {
         const val DEF_ASC_ICON = "\uf062"

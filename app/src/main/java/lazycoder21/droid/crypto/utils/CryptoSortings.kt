@@ -15,8 +15,8 @@ annotation class SortOptions {
     companion object {
         const val NONE = 0
         const val ALPHABETIC = 1
-        const val PRICE_CHANGE = 2
-        const val VOLUME = 3
+        const val VOLUME = 2
+        const val PRICE_CHANGE = 3
     }
 }
 

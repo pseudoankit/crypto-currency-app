@@ -14,11 +14,9 @@ class FavouriteCryptosViewModel @Inject constructor(
     private val cryptoRepository: CryptoRepository,
 ) : CryptoListingsBaseViewModel(cryptoRepository) {
 
-    fun fetchFavouriteListings(): LiveData<List<CryptoDetail>> {
-        //todo transformation
-        return cryptoRepository.getFavouriteCryptoListings(query).map {
+    override val fetchCryptoListings: LiveData<List<CryptoDetail>>
+        get() = cryptoRepository.getFavouriteCryptoListings(searchQuery).map {
             it.sort(sortOptions)
         }
-    }
 
 }

@@ -8,12 +8,15 @@ import lazycoder21.droid.crypto.presentation.base.BaseFragment
 import lazycoder21.droid.crypto.presentation.crypto_listings.adapter.CryptoListingAdapter
 import lazycoder21.droid.crypto.presentation.crypto_listings.adapter.FilterAdapter
 import lazycoder21.droid.crypto.presentation.main.MainActivity
+import lazycoder21.droid.crypto.utils.SortOptions
+import lazycoder21.droid.crypto.utils.SortOrder
 import lazycoder21.droid.crypto.utils.Utils.fastLazy
 
 abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBaseBinding>() {
 
     private val viewModel: CryptoListingsBaseViewModel by fastLazy { provideViewModel() }
 
+    private val filterAdapter by fastLazy { FilterAdapter(onFilterChanged = ::onFilterChanged) }
     val adapter by fastLazy { CryptoListingAdapter(::itemClicked, ::itemFavourite) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,6 +28,13 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
         initRecyclerView()
         initListener()
         loadData()
+        initObserver()
+    }
+
+    private fun initObserver() {
+        viewModel.cryptoListingsLiveData.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
     }
 
     private fun initListener() = with(binding) {
@@ -44,10 +54,13 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
             adapter = this@CryptoListingsBaseFragment.adapter
         }
 
-        val filterAdapter = FilterAdapter()
         binding.rvFilter.apply {
             adapter = filterAdapter
         }
+    }
+
+    private fun onFilterChanged(@SortOptions sortOptions: Int, @SortOrder sortOrder: Int) {
+        viewModel.sort(sortOptions, sortOrder)
     }
 
     private fun itemFavourite(item: CryptoDetail) {
@@ -62,6 +75,5 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
         FragmentCryptoListingBaseBinding.inflate(layoutInflater)
 
     abstract fun loadData()
-
     abstract fun provideViewModel(): CryptoListingsBaseViewModel
 }

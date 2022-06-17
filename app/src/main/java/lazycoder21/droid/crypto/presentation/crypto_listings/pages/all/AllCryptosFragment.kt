@@ -11,12 +11,6 @@ class AllCryptosFragment : CryptoListingsBaseFragment() {
 
     private val viewModel: AllCryptoViewModel by viewModels()
 
-    private fun fetchListings() {
-        viewModel.fetchAllListings().observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
-    }
-
     private fun setUpSearchView(searchView: SearchView) = with(searchView) {
         queryHint = resources.getString(R.string.crypto_search_hint)
         isSubmitButtonEnabled = false
@@ -30,7 +24,7 @@ class AllCryptosFragment : CryptoListingsBaseFragment() {
             }
 
             override fun onQueryTextChange(query: String): Boolean {
-                viewModel.query = query
+                viewModel.searchQuery = query
                 loadData()
                 return true
             }
@@ -38,7 +32,7 @@ class AllCryptosFragment : CryptoListingsBaseFragment() {
     }
 
     override fun loadData() {
-        fetchListings()
+        viewModel.fetchCryptoListings
     }
 
     override fun provideViewModel() = viewModel
