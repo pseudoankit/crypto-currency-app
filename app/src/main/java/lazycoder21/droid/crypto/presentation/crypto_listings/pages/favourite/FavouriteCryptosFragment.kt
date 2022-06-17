@@ -15,7 +15,7 @@ class FavouriteCryptosFragment : CryptoListingsBaseFragment() {
         }
     }
 
-    override fun searchQueryChanged() {
+    override fun loadData() {
         fetchListings()
     }
 

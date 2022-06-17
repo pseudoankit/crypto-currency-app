@@ -30,7 +30,7 @@ object Utils {
     fun CoroutineScope.launchIO(block: suspend CoroutineScope.() -> Unit) =
         launch(Dispatchers.IO, block = block)
 
-    inline fun <reified T> String.parse(): T? {
+    suspend inline fun <reified T> String.parse(): T? {
         return Gson().fromJson(this, T::class.java)
     }
 

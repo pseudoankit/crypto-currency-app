@@ -15,7 +15,6 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
 
     val adapter by fastLazy { CryptoListingAdapter(::itemClicked, ::itemFavourite) }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
@@ -24,7 +23,7 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
     private fun init() {
         initRecyclerView()
         initListener()
-        searchQueryChanged()
+        loadData()
     }
 
     private fun initListener() = with(binding) {
@@ -56,7 +55,7 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
     override fun inflateLayout(layoutInflater: LayoutInflater) =
         FragmentCryptoListingBaseBinding.inflate(layoutInflater)
 
-    abstract fun searchQueryChanged()
+    abstract fun loadData()
 
     abstract fun provideViewModel(): CryptoListingsBaseViewModel
 }
