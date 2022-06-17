@@ -12,19 +12,24 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/filter"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFilter"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        app:layout_constraintTop_toBottomOf="@id/layout_top_section"
-        layout="@layout/filter_crypto_listings" />
+        android:layout_height="30dp"
+        android:paddingHorizontal="@dimen/dp_10"
+        android:paddingVertical="@dimen/dp_5"
+        android:orientation="horizontal"
+        android:background="@color/black"
+        tools:itemCount="3"
+        app:layoutManager=".utils.EvenlyDistributedLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/layout_top_section" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filter">
+        app:layout_constraintTop_toBottomOf="@id/rvFilter">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

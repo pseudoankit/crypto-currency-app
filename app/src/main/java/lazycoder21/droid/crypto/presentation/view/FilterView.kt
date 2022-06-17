@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.widget.LinearLayout
 import android.widget.TextView
 import lazycoder21.droid.crypto.R
-import lazycoder21.droid.crypto.utils.SortOptions
+import lazycoder21.droid.crypto.utils.SortOrder
 import lazycoder21.droid.crypto.utils.Utils.mColor
 import lazycoder21.droid.crypto.utils.Utils.mDimension
 import lostankit7.droid.customview.FontAwesomeIcon
@@ -16,15 +16,15 @@ class FilterView @JvmOverloads constructor(
     context: Context, private val attrs: AttributeSet? = null, defStyleAttr: Int = 0,
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    @SortOptions
-    var sortOption: Int = SortOptions.ASCENDING
+    @SortOrder
+    var sortOrder: Int = SortOrder.ASCENDING
         private set
-    var iconCTA: ((Int) -> Unit)? = null
 
-    private lateinit var text: String
-    private lateinit var ascIcon: String
-    private lateinit var descIcon: String
+    var iconCTA: ((@SortOrder Int) -> Unit)? = null
+
+    private var filterParams = FilterParams("")
     private var icon: FontAwesomeIcon? = null
+    private var textView: TextView? = null
 
     init {
         manageAttributes()
@@ -32,13 +32,25 @@ class FilterView @JvmOverloads constructor(
 
     }
 
+    fun initialize(
+        filterName: String, ascIcon: String? = null, descIcon: String? = null,
+    ) {
+        filterParams.filterName = filterName
+        if (ascIcon != null) {
+            filterParams.ascIcon = ascIcon
+        }
+        if (descIcon != null) {
+            filterParams.descIcon = descIcon
+        }
+        updateTextView()
+        updateIcon()
+    }
+
     private fun initView() {
-        val textView = TextView(context).apply {
-            text = this@FilterView.text
+        textView = TextView(context).apply {
             setTextColor(context.mColor(R.color.white))
         }
         icon = FontAwesomeIcon(context).apply {
-            text = ascIcon
             updateTypeface(FontAwesomeIconType.SOLID)
             setPadding(
                 context.mDimension(R.dimen.dp_5).toInt(),
@@ -46,39 +58,58 @@ class FilterView @JvmOverloads constructor(
             )
             setTextColor(context.mColor(R.color.white))
         }
+        updateTextView()
+        updateIcon()
 
         orientation = LinearLayout.HORIZONTAL
         addView(textView)
         addView(icon)
 
-        setOnClickListener { filterCTA() }
+        this.setOnClickListener { filterCTA() }
     }
 
     private fun filterCTA() {
         invertSortOptionAndUpdateIcon()
-        iconCTA?.invoke(sortOption)
+        iconCTA?.invoke(sortOrder)
     }
 
     private fun invertSortOptionAndUpdateIcon() {
-        sortOption = if (sortOption == SortOptions.ASCENDING) {
-            icon?.text = descIcon
-            SortOptions.DESCENDING
+        sortOrder = if (sortOrder == SortOrder.ASCENDING) {
+            SortOrder.DESCENDING
         } else {
-            icon?.text = ascIcon
-            SortOptions.ASCENDING
+            SortOrder.ASCENDING
+        }
+        updateIcon()
+    }
+
+    private fun updateTextView() {
+        textView?.text = filterParams.filterName
+    }
+
+    private fun updateIcon() {
+        icon?.text = if (sortOrder == SortOrder.ASCENDING) {
+            filterParams.descIcon
+        } else {
+            filterParams.ascIcon
         }
     }
 
-    private fun manageAttributes() {
+    private fun manageAttributes() = with(filterParams) {
         val arr = context.obtainStyledAttributes(attrs, R.styleable.FilterView)
         try {
-            text = arr.getString(R.styleable.FilterView_filter_name) ?: ""
+            filterName = arr.getString(R.styleable.FilterView_filter_name) ?: ""
             ascIcon = arr.getString(R.styleable.FilterView_asc_icon) ?: DEF_ASC_ICON
             descIcon = arr.getString(R.styleable.FilterView_desc_icon) ?: DEF_DESC_ICON
         } catch (e: Exception) {
         }
         arr.recycle()
     }
+
+    data class FilterParams(
+        var filterName: String,
+        var ascIcon: String? = null,
+        var descIcon: String? = null,
+    )
 
     companion object {
         const val DEF_ASC_ICON = "\uf062"

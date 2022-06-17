@@ -6,6 +6,7 @@ import lazycoder21.droid.crypto.databinding.FragmentCryptoListingBaseBinding
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
 import lazycoder21.droid.crypto.presentation.base.BaseFragment
 import lazycoder21.droid.crypto.presentation.crypto_listings.adapter.CryptoListingAdapter
+import lazycoder21.droid.crypto.presentation.crypto_listings.adapter.FilterAdapter
 import lazycoder21.droid.crypto.presentation.main.MainActivity
 import lazycoder21.droid.crypto.utils.Utils.fastLazy
 
@@ -33,14 +34,19 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
                 isRefreshing = false
             }
         }
+        binding.scrollToTop.setOnClickListener {
+            binding.recyclerView.smoothScrollToPosition(0)
+        }
     }
 
     private fun initRecyclerView() {
         binding.recyclerView.apply {
             adapter = this@CryptoListingsBaseFragment.adapter
         }
-        binding.scrollToTop.setOnClickListener {
-            binding.recyclerView.smoothScrollToPosition(0)
+
+        val filterAdapter = FilterAdapter()
+        binding.rvFilter.apply {
+            adapter = filterAdapter
         }
     }
 
