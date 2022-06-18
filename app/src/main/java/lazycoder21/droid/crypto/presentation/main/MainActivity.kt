@@ -24,10 +24,6 @@ class MainActivity : AppCompatActivity() {
             tag = CryptoListingsFragment.TAG
         )
 
-        syncData()
-    }
-
-    private fun syncData() {
         viewModel.sync()
     }
 

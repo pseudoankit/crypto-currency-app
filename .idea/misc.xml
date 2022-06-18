@@ -3,16 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.22037037037037038" />
         <entry key="../../../.gradle/caches/transforms-3/58a2640e68ab2f930c570828a4d3734d/transformed/appcompat-1.4.2/res/layout/abc_search_view.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/drawable/search_bar_background.xml" value="0.18425925925925926" />
         <entry key="app/src/main/res/layout/action_bar_crypto_detail.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29791666666666666" />
+        <entry key="app/src/main/res/layout/filter_crypto_listings.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/fragment_crypot_listing_base.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/layout/fragment_crypto_detail.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/fragment_crypto_listing_base.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_crypto_listings.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_cryto_detail.xml" value="0.2838541666666667" />
         <entry key="app/src/main/res/layout/rv_item_crypto_listing_item.xml" value="0.29791666666666666" />
+        <entry key="app/src/main/res/layout/rv_item_filter.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/layout/text_view_price_change.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/menu/menu_filter_options.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/menu/menu_options.xml" value="0.29791666666666666" />

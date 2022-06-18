@@ -4,48 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.crypto_listings.pages.CryptoListingsBaseFragment">
+    tools:context=".presentation.crypto_listings.pages.base.CryptoListingsBaseFragment">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchBar"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/search_bar_height"
-        android:layout_marginHorizontal="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_5"
-        android:background="@drawable/search_bar_background"
-        app:iconifiedByDefault="false"
-        app:layout_constraintEnd_toStartOf="@id/btnSort"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:queryHint="@string/crypto_search_hint" />
-
-    <lostankit7.droid.customview.FontAwesomeIcon
-        android:id="@+id/btnSort"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/layout_top_section"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_5"
-        android:text="\uf0b0"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:icon_type="fa_solid"
-        app:layout_constraintBottom_toBottomOf="@id/searchBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/searchBar" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFilter"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:paddingHorizontal="@dimen/dp_10"
+        android:paddingVertical="@dimen/dp_5"
+        android:orientation="horizontal"
+        android:background="@color/black"
+        tools:itemCount="3"
+        app:layoutManager=".utils.EvenlyDistributedLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/layout_top_section" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchBar">
+        app:layout_constraintTop_toBottomOf="@id/rvFilter">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/searchBar"
             tools:itemCount="4"
             tools:listitem="@layout/rv_item_crypto_listing_item" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -53,11 +43,11 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/scrollToTop"
         android:layout_width="wrap_content"
-        android:src="@android:drawable/arrow_up_float"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_10"
         android:backgroundTint="@color/white"
         android:contentDescription="scroll to top"
+        android:src="@android:drawable/arrow_up_float"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

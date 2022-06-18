@@ -22,7 +22,11 @@ class CryptoRepositoryImpl @Inject constructor(
 
     private val dao = db.cryptoDao
 
-    override fun getCryptoListings(symbol: String): LiveData<List<CryptoDetail>> {
+    override fun getCryptoListings(
+        symbol: String,
+        sortOrder: Int,
+        sortOptions: Int,
+    ): LiveData<List<CryptoDetail>> {
         return dao.getListings(symbol = symbol).map { it.mapToDomain }
     }
 
@@ -53,7 +57,11 @@ class CryptoRepositoryImpl @Inject constructor(
         dao.update(item = item.mapToLocal)
     }
 
-    override fun getFavouriteCryptoListings(query: String): LiveData<List<CryptoDetail>> {
+    override fun getFavouriteCryptoListings(
+        query: String,
+        sortOrder: Int,
+        sortOptions: Int,
+    ): LiveData<List<CryptoDetail>> {
         return dao.getFavouriteListings(query).map { it.mapToDomain }
     }
 }

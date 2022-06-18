@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FilterView">
+        <attr name="filter_name" format="string" />
+        <attr name="asc_icon" format="string" />
+        <attr name="desc_icon" format="string" />
+    </declare-styleable>
+</resources>
