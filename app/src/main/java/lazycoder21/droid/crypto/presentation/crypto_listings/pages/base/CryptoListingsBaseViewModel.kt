@@ -15,7 +15,6 @@ abstract class CryptoListingsBaseViewModel(
     private val cryptoRepository: CryptoRepository,
 ) : ViewModel() {
 
-    //    protected val _cryptoListingsLiveData = MutableLiveData<List<CryptoDetail>>()
     val cryptoListingsLiveData: LiveData<List<CryptoDetail>> by fastLazy {
         fetchCryptoListings
     }
