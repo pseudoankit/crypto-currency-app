@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".presentation.crypto_listings.pages.base.CryptoListingsBaseFragment">
 
-    <FrameLayout
-        android:id="@+id/layout_top_section"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +22,7 @@
         android:background="@color/black"
         tools:itemCount="3"
         app:layoutManager=".utils.EvenlyDistributedLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/layout_top_section" />
+        app:layout_constraintTop_toBottomOf="@id/search_bar" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"

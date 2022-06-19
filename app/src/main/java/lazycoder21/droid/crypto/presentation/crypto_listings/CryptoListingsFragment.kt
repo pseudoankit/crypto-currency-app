@@ -31,8 +31,8 @@ class CryptoListingsFragment : BaseFragment<FragmentCryptoListingsBinding>() {
 
     private val buildViewPager
         get() = ViewPagerAdapter(childFragmentManager).apply {
-            add(FavouriteCryptosFragment(), "Favourite")
             add(AllCryptosFragment(), "All")
+            add(FavouriteCryptosFragment(), "Favourite")
         }
 
     override fun inflateLayout(layoutInflater: LayoutInflater) =

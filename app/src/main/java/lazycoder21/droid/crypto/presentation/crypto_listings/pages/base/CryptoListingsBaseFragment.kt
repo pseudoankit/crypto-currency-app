@@ -2,7 +2,9 @@ package lazycoder21.droid.crypto.presentation.crypto_listings.pages.base
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.LiveData
+import lazycoder21.droid.crypto.R
 import lazycoder21.droid.crypto.databinding.FragmentCryptoListingBaseBinding
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
 import lazycoder21.droid.crypto.presentation.base.BaseFragment
@@ -32,6 +34,7 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
     private fun init() {
         initRecyclerView()
         initListener()
+        setUpSearchView(binding.searchBar)
         updateListing()
     }
 
@@ -73,12 +76,32 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
     override fun inflateLayout(layoutInflater: LayoutInflater) =
         FragmentCryptoListingBaseBinding.inflate(layoutInflater)
 
-    fun updateListing() {
+    private fun updateListing() {
         lastObservedLiveData?.removeObservers(viewLifecycleOwner)
         lastObservedLiveData = viewModel.fetchCryptoListings().apply {
             removeObservers(viewLifecycleOwner)
             observe(viewLifecycleOwner) {
                 adapter.submitList(it)
+            }
+        }
+    }
+
+    private fun setUpSearchView(searchView: SearchView) = with(searchView) {
+        queryHint = resources.getString(R.string.crypto_search_hint)
+        isSubmitButtonEnabled = false
+        setOnQueryTextListener(searchBarListener())
+    }
+
+    private fun searchBarListener(): SearchView.OnQueryTextListener {
+        return object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(query: String): Boolean {
+                viewModel.searchQuery = query
+                updateListing()
+                return true
             }
         }
     }
