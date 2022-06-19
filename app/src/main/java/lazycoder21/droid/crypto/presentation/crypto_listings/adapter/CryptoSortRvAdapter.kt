@@ -36,10 +36,19 @@ class CryptoSortRvAdapter(
             val item = list[adapterPosition]
             item.apply {
                 initialize(filterName = title, ascIcon, descIcon)
+                updateTextColor(item.isSelected)
             }
             iconCTA = { sortOrder ->
+                updateSelectedSortItem(position = adapterPosition)
                 onFilterChanged.invoke(item.sortOptions, sortOrder)
             }
         }
+    }
+
+    private fun updateSelectedSortItem(position: Int) {
+        list.forEachIndexed { idx, item ->
+            item.isSelected = idx == position
+        }
+        notifyDataSetChanged()
     }
 }

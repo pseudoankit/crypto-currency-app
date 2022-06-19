@@ -32,6 +32,14 @@ class FilterView @JvmOverloads constructor(
 
     }
 
+    fun updateTextColor(isSelected: Boolean) {
+        val color = context.mColor(if (isSelected) R.color.purple_200 else R.color.white)
+        color.apply {
+            textView?.setTextColor(this)
+            icon?.setTextColor(this)
+        }
+    }
+
     fun initialize(
         filterName: String, ascIcon: String? = null, descIcon: String? = null,
     ) {

@@ -5,4 +5,6 @@ data class FilterView(
     val sortOptions: Int,
     val ascIcon: String? = null,
     val descIcon: String? = null,
-)
+) {
+    var isSelected = false
+}
