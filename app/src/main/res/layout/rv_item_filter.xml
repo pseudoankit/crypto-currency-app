@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<lazycoder21.droid.crypto.presentation.view.FilterView xmlns:android="http://schemas.android.com/apk/res/android"
+<lazycoder21.droid.crypto.presentation.view.SortingView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/filterView"
     android:layout_width="wrap_content"

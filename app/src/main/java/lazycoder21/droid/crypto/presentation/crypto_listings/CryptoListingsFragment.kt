@@ -6,8 +6,8 @@ import android.view.View
 import lazycoder21.droid.crypto.databinding.FragmentCryptoListingsBinding
 import lazycoder21.droid.crypto.presentation.base.BaseFragment
 import lazycoder21.droid.crypto.presentation.crypto_listings.adapter.ViewPagerAdapter
-import lazycoder21.droid.crypto.presentation.crypto_listings.pages.all.AllCryptosFragment
-import lazycoder21.droid.crypto.presentation.crypto_listings.pages.favourite.FavouriteCryptosFragment
+import lazycoder21.droid.crypto.presentation.crypto_listings.pages.AllCryptosFragment
+import lazycoder21.droid.crypto.presentation.crypto_listings.pages.FavouriteCryptosFragment
 import lazycoder21.droid.crypto.utils.CryptoFilter
 import lazycoder21.droid.crypto.utils.Utils.fastLazy
 

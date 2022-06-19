@@ -1,8 +1,9 @@
-package lazycoder21.droid.crypto.presentation.crypto_listings.pages.base
+package lazycoder21.droid.crypto.presentation.crypto_listings
 
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import lazycoder21.droid.crypto.R
 import lazycoder21.droid.crypto.databinding.FragmentCryptoListingBaseBinding
@@ -11,17 +12,18 @@ import lazycoder21.droid.crypto.presentation.base.BaseFragment
 import lazycoder21.droid.crypto.presentation.crypto_listings.adapter.CryptoListingAdapter
 import lazycoder21.droid.crypto.presentation.crypto_listings.adapter.CryptoSortRvAdapter
 import lazycoder21.droid.crypto.presentation.main.MainActivity
+import lazycoder21.droid.crypto.utils.CryptoFilter
 import lazycoder21.droid.crypto.utils.CryptoSortingUtils
 import lazycoder21.droid.crypto.utils.Utils.fastLazy
 
-abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBaseBinding>() {
+abstract class CryptoListingsBaseFragment(
+    private val filter: CryptoFilter
+) : BaseFragment<FragmentCryptoListingBaseBinding>() {
 
-    private val viewModel: CryptoListingsBaseViewModel by fastLazy { provideViewModel() }
+    private val viewModel: CryptoListingsViewModel by viewModels()
 
     private val sortingRvAdapter by fastLazy { CryptoSortRvAdapter(onFilterChanged = ::onFilterChanged) }
     private val adapter by fastLazy { CryptoListingAdapter(::itemClicked, ::itemFavourite) }
-
-    private var lastObservedLiveData: LiveData<List<CryptoDetail>>? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -76,9 +78,10 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
     override fun inflateLayout(layoutInflater: LayoutInflater) =
         FragmentCryptoListingBaseBinding.inflate(layoutInflater)
 
+    private var lastObservedLiveData: LiveData<List<CryptoDetail>>? = null
     private fun updateListing() {
         lastObservedLiveData?.removeObservers(viewLifecycleOwner)
-        lastObservedLiveData = viewModel.fetchCryptoListings().apply {
+        lastObservedLiveData = viewModel.cryptoListing(filter = filter).apply {
             removeObservers(viewLifecycleOwner)
             observe(viewLifecycleOwner) {
                 adapter.submitList(it)
@@ -105,6 +108,4 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
             }
         }
     }
-
-    abstract fun provideViewModel(): CryptoListingsBaseViewModel
 }

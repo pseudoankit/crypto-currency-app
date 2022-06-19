@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import lazycoder21.droid.crypto.databinding.RvItemFilterBinding
-import lazycoder21.droid.crypto.domain.model.FilterView
+import lazycoder21.droid.crypto.domain.model.SortingModel
 import lazycoder21.droid.crypto.utils.CryptoSortingUtils
 
 class CryptoSortRvAdapter(
-    private val list: List<FilterView> = CryptoSortingUtils.sortingOptions(),
+    private val list: List<SortingModel> = CryptoSortingUtils.sortingOptions(),
     private val onFilterChanged: (@CryptoSortingUtils.SortOptions Int, @CryptoSortingUtils.SortOrder Int) -> Unit,
 ) : RecyclerView.Adapter<CryptoSortRvAdapter.ViewHolder>() {
 

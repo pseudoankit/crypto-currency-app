@@ -1,7 +1,7 @@
 package lazycoder21.droid.crypto.utils
 
 import androidx.annotation.IntDef
-import lazycoder21.droid.crypto.domain.model.FilterView
+import lazycoder21.droid.crypto.domain.model.SortingModel
 import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOptions.Companion.ALPHABETIC
 import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOptions.Companion.PRICE_CHANGE
 import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOptions.Companion.VOLUME
@@ -11,9 +11,9 @@ import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOrder.Companion.DES
 object CryptoSortingUtils {
 
     fun sortingOptions() = listOf(
-        FilterView("A-Z", SortOptions.ALPHABETIC),
-        FilterView("Volume", SortOptions.VOLUME),
-        FilterView("Price Change", SortOptions.PRICE_CHANGE)
+        SortingModel("A-Z", SortOptions.ALPHABETIC),
+        SortingModel("Volume", SortOptions.VOLUME),
+        SortingModel("Price Change", SortOptions.PRICE_CHANGE)
     )
 
     @Target(AnnotationTarget.PROPERTY, AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.TYPE)

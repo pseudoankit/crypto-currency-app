@@ -12,7 +12,7 @@ import lostankit7.droid.customview.FontAwesomeIcon
 import lostankit7.droid.customview.FontAwesomeIconType
 import lostankit7.droid.utils.updateTypeface
 
-class FilterView @JvmOverloads constructor(
+class SortingView @JvmOverloads constructor(
     context: Context, private val attrs: AttributeSet? = null, defStyleAttr: Int = 0,
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
