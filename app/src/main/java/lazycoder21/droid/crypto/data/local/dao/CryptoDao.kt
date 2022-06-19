@@ -5,6 +5,8 @@ import androidx.room.*
 import lazycoder21.droid.crypto.data.local.entity.CryptoDetailLocal
 import lazycoder21.droid.crypto.data.local.entity.CryptoDetailPartial
 import lazycoder21.droid.crypto.data.mapper.CryptoListingMapper.mapPartial
+import lazycoder21.droid.crypto.utils.SortOptions
+import lazycoder21.droid.crypto.utils.SortOrder
 
 @Dao
 interface CryptoDao {
@@ -12,9 +14,20 @@ interface CryptoDao {
     @Query(
         value = """
         SELECT * FROM cryptodetaillocal WHERE Lower(symbol) LIKE '%' || Lower(:symbol) || '%' 
+        ORDER BY 
+            CASE WHEN :sortOption = 1 and :sortOrder = 1 THEN symbol END DESC,
+            CASE WHEN :sortOption = 1 and :sortOrder != 1 THEN symbol END ASC,
+            CASE WHEN :sortOption = 2 and :sortOrder = 1 THEN volume END DESC,
+            CASE WHEN :sortOption = 2 and :sortOrder != 1 THEN volume END ASC,
+            CASE WHEN :sortOption = 3 and :sortOrder = 1 THEN priceChange END DESC,
+            CASE WHEN :sortOption = 3 and :sortOrder != 1 THEN priceChange END ASC
     """
     )
-    fun getListings(symbol: String = ""): LiveData<List<CryptoDetailLocal>>
+    fun getListings(
+        symbol: String = "",
+        sortOrder: Int = SortOrder.ASCENDING,
+        sortOption: Int = SortOptions.ALPHABETIC
+    ): LiveData<List<CryptoDetailLocal>>
 
     @Query(
         value = """
@@ -50,8 +63,12 @@ interface CryptoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDetail(item: CryptoDetailLocal)
 
-    @Update
-    suspend fun update(item: CryptoDetailLocal)
+    @Query(
+        """
+        UPDATE cryptodetaillocal  SET favourite = :favourite WHERE symbol == :symbol 
+    """
+    )
+    suspend fun update(symbol: String, favourite: Int)
 
     @Query("DELETE FROM cryptodetaillocal")
     suspend fun clearListings()

@@ -16,4 +16,5 @@ data class CryptoDetailPartial(
     val quoteAsset: String? = null,
     val bidPrice: String? = null,
     val lastPrice: String? = null,
+    val priceChange: Float = 0.0f
 )

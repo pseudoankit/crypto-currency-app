@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.core.text.buildSpannedString
 import lazycoder21.droid.crypto.R
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
-import lazycoder21.droid.crypto.domain.model.CryptoDetail.Companion.priceChange
 import lazycoder21.droid.crypto.utils.Utils.mColor
 import lazycoder21.droid.crypto.utils.Utils.spanColor
 import lostankit7.droid.customview.FontAwesomeIcon

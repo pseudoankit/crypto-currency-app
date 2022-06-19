@@ -19,5 +19,6 @@ data class CryptoDetailLocal(
     val lastPrice: String? = null,
     @ColumnInfo(defaultValue = "0")
     val favourite: Boolean = false,
+    val priceChange: Float = 0.0f
 )
 

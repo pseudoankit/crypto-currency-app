@@ -15,6 +15,14 @@ data class CryptoListingsRemote(
         val quoteAsset: String? = null,
         val bidPrice: String? = null,
         val lastPrice: String? = null,
-    )
+    ) {
+        val priceChange: Float
+            get() = run {
+                val default = 0f
+                val curr = lastPrice?.toFloatOrNull() ?: default
+                val open = openPrice?.toFloatOrNull() ?: default
+                (curr - open) / open * 100
+            }
+    }
 }
 

@@ -24,7 +24,8 @@ object CryptoListingMapper {
                 quoteAsset = quoteAsset,
                 bidPrice = bidPrice,
                 lastPrice = lastPrice,
-                favourite = favourite
+                favourite = favourite,
+                priceChange = priceChange
             )
         }
 
@@ -42,27 +43,7 @@ object CryptoListingMapper {
                 quoteAsset = quoteAsset,
                 bidPrice = bidPrice,
                 lastPrice = lastPrice,
-            )
-        }
-
-    val List<CryptoDetail>.mapToLocal: List<CryptoDetailLocal>
-        get() = run { map { it.mapToLocal } }
-
-    val CryptoDetail.mapToLocal: CryptoDetailLocal
-        get() = run {
-            CryptoDetailLocal(
-                volume = volume,
-                symbol = symbol,
-                askPrice = askPrice,
-                at = at,
-                lowPrice = lowPrice,
-                highPrice = highPrice,
-                openPrice = openPrice,
-                baseAsset = baseAsset,
-                quoteAsset = quoteAsset,
-                bidPrice = bidPrice,
-                lastPrice = lastPrice,
-                favourite = favourite
+                priceChange = priceChange
             )
         }
 
@@ -83,6 +64,7 @@ object CryptoListingMapper {
                 quoteAsset = quoteAsset,
                 bidPrice = bidPrice,
                 lastPrice = lastPrice,
+                priceChange = priceChange
             )
         }
 }

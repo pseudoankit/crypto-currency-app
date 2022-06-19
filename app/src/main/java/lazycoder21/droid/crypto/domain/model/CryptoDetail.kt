@@ -16,17 +16,10 @@ data class CryptoDetail(
     val bidPrice: String? = null,
     val lastPrice: String? = null,
     val id: Int? = null,
+    val priceChange: Float = 0.0f,
     var favourite: Boolean = false,
 ) {
     companion object {
-        val CryptoDetail.priceChange: Float
-            get() = run {
-                val default = 0f
-                val curr = lastPrice?.toFloatOrNull() ?: default
-                val open = openPrice?.toFloatOrNull() ?: default
-                (curr - open) / open * 100
-            }
-
         fun List<CryptoDetail>.sort(@SortOptions sortOptions: Int, @SortOrder sortOrder: Int) =
             sortedWith { o1, o2 ->
                 val sortingMultiplier = if (sortOrder == SortOrder.DESCENDING) -1 else 1
