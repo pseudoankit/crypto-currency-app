@@ -99,7 +99,7 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
             }
 
             override fun onQueryTextChange(query: String): Boolean {
-                viewModel.searchQuery = query
+                viewModel.updateSearchQuery(query)
                 updateListing()
                 return true
             }

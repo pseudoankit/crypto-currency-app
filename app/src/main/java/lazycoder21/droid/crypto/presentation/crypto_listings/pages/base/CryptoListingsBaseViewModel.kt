@@ -1,10 +1,12 @@
 package lazycoder21.droid.crypto.presentation.crypto_listings.pages.base
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
+import lazycoder21.droid.crypto.domain.model.FilterTransformation
 import lazycoder21.droid.crypto.domain.repository.CryptoRepository
 import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOptions
 import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOrder
@@ -14,33 +16,27 @@ abstract class CryptoListingsBaseViewModel(
     private val cryptoRepository: CryptoRepository,
 ) : ViewModel() {
 
-    //todo move sorting in dao, use transformation for changing query and sort
-//    val cryptoListingsLiveData: LiveData<List<CryptoDetail>>
-//        get() = fetchCryptoListings
+    protected val filterTransformation = FilterTransformation()
+    protected val transformationParams = MutableLiveData(filterTransformation)
 
-    var searchQuery = ""
-
-    @SortOptions
-    var sortOption: Int = SortOptions.ALPHABETIC
-        private set
-
-    @SortOrder
-    var sortOrder: Int = SortOrder.ASCENDING
-        private set
-
-    private var syncDataJob: Job? = null
+    fun updateSearchQuery(query: String) {
+        filterTransformation.searchQuery = query
+        transformationParams.value = filterTransformation
+    }
 
     fun sort(
         @SortOptions sortOptions: Int, @SortOrder sortOrder: Int,
     ) {
-        this.sortOrder = sortOrder
-        this.sortOption = sortOptions
+        filterTransformation.sortOrder = sortOrder
+        filterTransformation.sortOption = sortOptions
+        transformationParams.value = filterTransformation
     }
 
     fun favouriteCrypto(item: CryptoDetail) = viewModelScope.launchIO {
         cryptoRepository.favouriteCrypto(item)
     }
 
+    private var syncDataJob: Job? = null
     fun syncData() {
         syncDataJob?.cancel()
         syncDataJob = viewModelScope.launchIO {
