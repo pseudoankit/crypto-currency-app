@@ -1,5 +1,6 @@
 package lazycoder21.droid.crypto.presentation.crypto_listings.pages.all
 
+import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -10,6 +11,20 @@ import lazycoder21.droid.crypto.presentation.crypto_listings.pages.base.CryptoLi
 class AllCryptosFragment : CryptoListingsBaseFragment() {
 
     private val viewModel: AllCryptoViewModel by viewModels()
+
+    override fun onCreateView() {
+        super.onCreateView()
+        val searchView = context?.let {
+            SearchView(it).apply {
+                setUpSearchView(this)
+                layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+            }
+        }
+        binding.layoutTopSection.addView(searchView)
+    }
 
     private fun setUpSearchView(searchView: SearchView) = with(searchView) {
         queryHint = resources.getString(R.string.crypto_search_hint)
@@ -25,14 +40,10 @@ class AllCryptosFragment : CryptoListingsBaseFragment() {
 
             override fun onQueryTextChange(query: String): Boolean {
                 viewModel.searchQuery = query
-                loadData()
+                updateListing()
                 return true
             }
         }
-    }
-
-    override fun loadData() {
-        viewModel.fetchCryptoListings
     }
 
     override fun provideViewModel() = viewModel

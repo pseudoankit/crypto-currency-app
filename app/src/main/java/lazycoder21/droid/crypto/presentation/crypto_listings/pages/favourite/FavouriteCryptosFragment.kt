@@ -9,9 +9,5 @@ class FavouriteCryptosFragment : CryptoListingsBaseFragment() {
 
     private val viewModel: FavouriteCryptosViewModel by viewModels()
 
-    override fun loadData() {
-        viewModel.fetchCryptoListings
-    }
-
     override fun provideViewModel() = viewModel
 }

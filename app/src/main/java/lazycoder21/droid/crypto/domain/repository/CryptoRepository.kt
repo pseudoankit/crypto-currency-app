@@ -12,7 +12,11 @@ interface CryptoRepository {
         @SortOptions sortOption: Int
     ): LiveData<List<CryptoDetail>>
 
-    fun getFavouriteCryptoListings(query: String = ""): LiveData<List<CryptoDetail>>
+    fun getFavouriteCryptoListings(
+        symbol: String,
+        @SortOrder sortOrder: Int,
+        @SortOptions sortOption: Int
+    ): LiveData<List<CryptoDetail>>
 
     fun getCryptoDetail(symbol: String): LiveData<CryptoDetail>
 

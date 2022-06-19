@@ -32,9 +32,21 @@ interface CryptoDao {
     @Query(
         value = """
         Select * from cryptodetaillocal WHERE (Lower(symbol) Like '%' || Lower(:symbol) || '%') and (favourite = 1)
+        ORDER BY 
+            CASE WHEN :sortOption = 1 and :sortOrder = 1 THEN symbol END DESC,
+            CASE WHEN :sortOption = 1 and :sortOrder != 1 THEN symbol END ASC,
+            CASE WHEN :sortOption = 2 and :sortOrder = 1 THEN volume END DESC,
+            CASE WHEN :sortOption = 2 and :sortOrder != 1 THEN volume END ASC,
+            CASE WHEN :sortOption = 3 and :sortOrder = 1 THEN priceChange END DESC,
+            CASE WHEN :sortOption = 3 and :sortOrder != 1 THEN priceChange END ASC
     """
     )
-    fun getFavouriteListings(symbol: String = ""): LiveData<List<CryptoDetailLocal>>
+    fun getFavouriteListings(
+        symbol: String = "",
+        sortOrder: Int = SortOrder.ASCENDING,
+        sortOption: Int = SortOptions.ALPHABETIC
+    ): LiveData<List<CryptoDetailLocal>>
+
 
     @Query(
         """
@@ -42,6 +54,7 @@ interface CryptoDao {
     """
     )
     fun getDetail(symbol: String): LiveData<CryptoDetailLocal>
+
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertListings(list: List<CryptoDetailLocal>): LongArray

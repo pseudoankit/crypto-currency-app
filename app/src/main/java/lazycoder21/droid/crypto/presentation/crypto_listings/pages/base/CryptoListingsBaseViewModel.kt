@@ -15,13 +15,13 @@ abstract class CryptoListingsBaseViewModel(
 ) : ViewModel() {
 
     //todo move sorting in dao, use transformation for changing query and sort
-    val cryptoListingsLiveData: LiveData<List<CryptoDetail>>
-        get() = fetchCryptoListings
+//    val cryptoListingsLiveData: LiveData<List<CryptoDetail>>
+//        get() = fetchCryptoListings
 
     var searchQuery = ""
 
     @SortOptions
-    var sortOptions: Int = SortOptions.ALPHABETIC
+    var sortOption: Int = SortOptions.ALPHABETIC
         private set
 
     @SortOrder
@@ -34,8 +34,7 @@ abstract class CryptoListingsBaseViewModel(
         @SortOptions sortOptions: Int, @SortOrder sortOrder: Int,
     ) {
         this.sortOrder = sortOrder
-        this.sortOptions = sortOptions
-        fetchCryptoListings
+        this.sortOption = sortOptions
     }
 
     fun favouriteCrypto(item: CryptoDetail) = viewModelScope.launchIO {
@@ -49,7 +48,7 @@ abstract class CryptoListingsBaseViewModel(
         }
     }
 
-    abstract val fetchCryptoListings: LiveData<List<CryptoDetail>>
+    abstract fun fetchCryptoListings(): LiveData<List<CryptoDetail>>
 
     override fun onCleared() {
         super.onCleared()

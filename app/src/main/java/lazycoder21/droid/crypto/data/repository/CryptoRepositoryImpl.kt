@@ -1,5 +1,6 @@
 package lazycoder21.droid.crypto.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import lazycoder21.droid.crypto.data.local.LocalDataBase
@@ -51,8 +52,11 @@ class CryptoRepositoryImpl @Inject constructor(
     }
 
     override fun getFavouriteCryptoListings(
-        query: String,
+        symbol: String,
+        sortOrder: Int,
+        sortOption: Int,
     ): LiveData<List<CryptoDetail>> {
-        return dao.getFavouriteListings(query).map { it.mapToDomain }
+        Log.d("TAG", "getFavouriteCryptoListings: option:$sortOption , order: $sortOrder")
+        return dao.getFavouriteListings(symbol, sortOrder, sortOption).map { it.mapToDomain }
     }
 }

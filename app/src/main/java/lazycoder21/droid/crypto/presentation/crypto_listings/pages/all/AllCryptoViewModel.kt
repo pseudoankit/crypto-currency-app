@@ -12,7 +12,8 @@ class AllCryptoViewModel @Inject constructor(
     private val cryptoRepository: CryptoRepository,
 ) : CryptoListingsBaseViewModel(cryptoRepository) {
 
-    override val fetchCryptoListings: LiveData<List<CryptoDetail>>
-        get() = cryptoRepository.getCryptoListings(searchQuery, sortOrder, sortOptions)
+    override fun fetchCryptoListings(): LiveData<List<CryptoDetail>> {
+        return cryptoRepository.getCryptoListings(searchQuery, sortOrder, sortOption)
+    }
 
 }
