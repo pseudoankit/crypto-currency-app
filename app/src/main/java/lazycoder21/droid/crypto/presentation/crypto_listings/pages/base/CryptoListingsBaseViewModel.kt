@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
 import lazycoder21.droid.crypto.domain.repository.CryptoRepository
-import lazycoder21.droid.crypto.utils.SortOptions
-import lazycoder21.droid.crypto.utils.SortOrder
+import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOptions
+import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOrder
 import lazycoder21.droid.crypto.utils.Utils.launchIO
 
 abstract class CryptoListingsBaseViewModel(

@@ -9,8 +9,8 @@ import lazycoder21.droid.crypto.data.mapper.CryptoListingMapper.mapToDomain
 import lazycoder21.droid.crypto.data.remote.CryptoApi
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
 import lazycoder21.droid.crypto.domain.repository.CryptoRepository
-import lazycoder21.droid.crypto.utils.SortOptions
-import lazycoder21.droid.crypto.utils.SortOrder
+import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOptions
+import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOrder
 import lazycoder21.droid.crypto.utils.Utils.safeApiCall
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -57,6 +57,10 @@ class CryptoRepositoryImpl @Inject constructor(
         sortOption: Int,
     ): LiveData<List<CryptoDetail>> {
         Log.d("TAG", "getFavouriteCryptoListings: option:$sortOption , order: $sortOrder")
-        return dao.getFavouriteListings(symbol, sortOrder, sortOption).map { it.mapToDomain }
+        return dao.getFavouriteListings(
+            symbol = symbol,
+            sortOrder = sortOrder,
+            sortOption = sortOption,
+        ).map { it.mapToDomain }
     }
 }

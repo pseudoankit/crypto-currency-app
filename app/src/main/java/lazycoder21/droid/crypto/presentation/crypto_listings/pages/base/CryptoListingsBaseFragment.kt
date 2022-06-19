@@ -9,19 +9,16 @@ import lazycoder21.droid.crypto.databinding.FragmentCryptoListingBaseBinding
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
 import lazycoder21.droid.crypto.presentation.base.BaseFragment
 import lazycoder21.droid.crypto.presentation.crypto_listings.adapter.CryptoListingAdapter
-import lazycoder21.droid.crypto.presentation.crypto_listings.adapter.FilterAdapter
+import lazycoder21.droid.crypto.presentation.crypto_listings.adapter.CryptoSortRvAdapter
 import lazycoder21.droid.crypto.presentation.main.MainActivity
-import lazycoder21.droid.crypto.utils.SortOptions
-import lazycoder21.droid.crypto.utils.SortOrder
+import lazycoder21.droid.crypto.utils.CryptoSortingUtils
 import lazycoder21.droid.crypto.utils.Utils.fastLazy
 
 abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBaseBinding>() {
 
-    val TAG get() = javaClass.simpleName
-
     private val viewModel: CryptoListingsBaseViewModel by fastLazy { provideViewModel() }
 
-    private val filterAdapter by fastLazy { FilterAdapter(onFilterChanged = ::onFilterChanged) }
+    private val sortingRvAdapter by fastLazy { CryptoSortRvAdapter(onFilterChanged = ::onFilterChanged) }
     private val adapter by fastLazy { CryptoListingAdapter(::itemClicked, ::itemFavourite) }
 
     private var lastObservedLiveData: LiveData<List<CryptoDetail>>? = null
@@ -56,11 +53,14 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
         }
 
         binding.rvFilter.apply {
-            adapter = filterAdapter
+            adapter = sortingRvAdapter
         }
     }
 
-    private fun onFilterChanged(@SortOptions sortOptions: Int, @SortOrder sortOrder: Int) {
+    private fun onFilterChanged(
+        @CryptoSortingUtils.SortOptions sortOptions: Int,
+        @CryptoSortingUtils.SortOrder sortOrder: Int
+    ) {
         viewModel.sort(sortOptions, sortOrder)
         updateListing()
     }

@@ -2,8 +2,8 @@ package lazycoder21.droid.crypto.domain.repository
 
 import androidx.lifecycle.LiveData
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
-import lazycoder21.droid.crypto.utils.SortOptions
-import lazycoder21.droid.crypto.utils.SortOrder
+import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOptions
+import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOrder
 
 interface CryptoRepository {
     fun getCryptoListings(

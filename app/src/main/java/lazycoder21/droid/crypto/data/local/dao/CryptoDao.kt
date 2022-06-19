@@ -5,8 +5,8 @@ import androidx.room.*
 import lazycoder21.droid.crypto.data.local.entity.CryptoDetailLocal
 import lazycoder21.droid.crypto.data.local.entity.CryptoDetailPartial
 import lazycoder21.droid.crypto.data.mapper.CryptoListingMapper.mapPartial
-import lazycoder21.droid.crypto.utils.SortOptions
-import lazycoder21.droid.crypto.utils.SortOrder
+import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOptions
+import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOrder
 
 @Dao
 interface CryptoDao {

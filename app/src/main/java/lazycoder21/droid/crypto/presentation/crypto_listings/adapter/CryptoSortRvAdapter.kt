@@ -5,23 +5,24 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import lazycoder21.droid.crypto.databinding.RvItemFilterBinding
 import lazycoder21.droid.crypto.domain.model.FilterView
-import lazycoder21.droid.crypto.utils.Constants
-import lazycoder21.droid.crypto.utils.SortOptions
-import lazycoder21.droid.crypto.utils.SortOrder
+import lazycoder21.droid.crypto.utils.CryptoSortingUtils
 
-class FilterAdapter(
-    private val list: List<FilterView> = Constants.getFilterList(),
-    private val onFilterChanged: (@SortOptions Int, @SortOrder Int) -> Unit,
-) : RecyclerView.Adapter<FilterAdapter.ViewHolder>() {
+class CryptoSortRvAdapter(
+    private val list: List<FilterView> = CryptoSortingUtils.sortingOptions(),
+    private val onFilterChanged: (@CryptoSortingUtils.SortOptions Int, @CryptoSortingUtils.SortOrder Int) -> Unit,
+) : RecyclerView.Adapter<CryptoSortRvAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterAdapter.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): CryptoSortRvAdapter.ViewHolder {
         val binding = RvItemFilterBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: FilterAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CryptoSortRvAdapter.ViewHolder, position: Int) {
         holder.bind()
     }
 

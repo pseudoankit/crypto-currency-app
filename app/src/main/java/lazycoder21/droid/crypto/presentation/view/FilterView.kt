@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.widget.LinearLayout
 import android.widget.TextView
 import lazycoder21.droid.crypto.R
-import lazycoder21.droid.crypto.utils.SortOrder
+import lazycoder21.droid.crypto.utils.CryptoSortingUtils
 import lazycoder21.droid.crypto.utils.Utils.mColor
 import lazycoder21.droid.crypto.utils.Utils.mDimension
 import lostankit7.droid.customview.FontAwesomeIcon
@@ -16,11 +16,11 @@ class FilterView @JvmOverloads constructor(
     context: Context, private val attrs: AttributeSet? = null, defStyleAttr: Int = 0,
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    @SortOrder
-    var sortOrder: Int = SortOrder.ASCENDING
+    @CryptoSortingUtils.SortOrder
+    var sortOrder: Int = CryptoSortingUtils.SortOrder.ASCENDING
         private set
 
-    var iconCTA: ((@SortOrder Int) -> Unit)? = null
+    var iconCTA: ((@CryptoSortingUtils.SortOrder Int) -> Unit)? = null
 
     private var filterParams = FilterParams.default
     private var icon: FontAwesomeIcon? = null
@@ -74,10 +74,10 @@ class FilterView @JvmOverloads constructor(
     }
 
     private fun invertSortOptionAndUpdateIcon() {
-        sortOrder = if (sortOrder == SortOrder.ASCENDING) {
-            SortOrder.DESCENDING
+        sortOrder = if (sortOrder == CryptoSortingUtils.SortOrder.ASCENDING) {
+            CryptoSortingUtils.SortOrder.DESCENDING
         } else {
-            SortOrder.ASCENDING
+            CryptoSortingUtils.SortOrder.ASCENDING
         }
         updateIcon()
     }
@@ -87,7 +87,7 @@ class FilterView @JvmOverloads constructor(
     }
 
     private fun updateIcon() {
-        icon?.text = if (sortOrder == SortOrder.ASCENDING) {
+        icon?.text = if (sortOrder == CryptoSortingUtils.SortOrder.ASCENDING) {
             filterParams.descIcon
         } else {
             filterParams.ascIcon

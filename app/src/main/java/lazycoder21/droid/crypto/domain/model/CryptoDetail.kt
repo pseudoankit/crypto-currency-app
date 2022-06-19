@@ -1,7 +1,7 @@
 package lazycoder21.droid.crypto.domain.model
 
-import lazycoder21.droid.crypto.utils.SortOptions
-import lazycoder21.droid.crypto.utils.SortOrder
+import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOptions
+import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOrder
 
 data class CryptoDetail(
     val volume: String? = null,
