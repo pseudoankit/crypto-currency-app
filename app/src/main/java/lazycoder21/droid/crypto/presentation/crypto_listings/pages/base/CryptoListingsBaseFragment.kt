@@ -17,7 +17,7 @@ abstract class CryptoListingsBaseFragment : BaseFragment<FragmentCryptoListingBa
     private val viewModel: CryptoListingsBaseViewModel by fastLazy { provideViewModel() }
 
     private val filterAdapter by fastLazy { FilterAdapter(onFilterChanged = ::onFilterChanged) }
-    val adapter by fastLazy { CryptoListingAdapter(::itemClicked, ::itemFavourite) }
+    private val adapter by fastLazy { CryptoListingAdapter(::itemClicked, ::itemFavourite) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

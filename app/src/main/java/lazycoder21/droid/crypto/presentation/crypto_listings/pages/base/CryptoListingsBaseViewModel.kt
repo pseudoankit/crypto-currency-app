@@ -2,22 +2,25 @@ package lazycoder21.droid.crypto.presentation.crypto_listings.pages.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
+import lazycoder21.droid.crypto.domain.model.CryptoDetail.Companion.sort
 import lazycoder21.droid.crypto.domain.repository.CryptoRepository
 import lazycoder21.droid.crypto.utils.SortOptions
 import lazycoder21.droid.crypto.utils.SortOrder
-import lazycoder21.droid.crypto.utils.Utils.fastLazy
 import lazycoder21.droid.crypto.utils.Utils.launchIO
 
 abstract class CryptoListingsBaseViewModel(
     private val cryptoRepository: CryptoRepository,
 ) : ViewModel() {
 
-    val cryptoListingsLiveData: LiveData<List<CryptoDetail>> by fastLazy {
-        fetchCryptoListings
-    }
+    //todo move sorting in dao, use transformation for changing query and sort
+    val cryptoListingsLiveData: LiveData<List<CryptoDetail>>
+        get() = fetchCryptoListings.map {
+            it.sort(sortOptions, sortOrder)
+        }
 
     var searchQuery = ""
 

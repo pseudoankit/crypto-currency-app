@@ -9,19 +9,25 @@ import lazycoder21.droid.crypto.data.mapper.CryptoListingMapper.mapPartial
 @Dao
 interface CryptoDao {
 
-    @Query("""
-        Select * from cryptodetaillocal WHERE Lower(symbol) Like '%' || Lower(:symbol) || '%'
-    """)
+    @Query(
+        value = """
+        SELECT * FROM cryptodetaillocal WHERE Lower(symbol) LIKE '%' || Lower(:symbol) || '%' 
+    """
+    )
     fun getListings(symbol: String = ""): LiveData<List<CryptoDetailLocal>>
 
-    @Query("""
+    @Query(
+        value = """
         Select * from cryptodetaillocal WHERE (Lower(symbol) Like '%' || Lower(:symbol) || '%') and (favourite = 1)
-    """)
+    """
+    )
     fun getFavouriteListings(symbol: String = ""): LiveData<List<CryptoDetailLocal>>
 
-    @Query("""
+    @Query(
+        """
         Select * from cryptodetaillocal Where Lower(symbol) = Lower(:symbol)
-    """)
+    """
+    )
     fun getDetail(symbol: String): LiveData<CryptoDetailLocal>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
