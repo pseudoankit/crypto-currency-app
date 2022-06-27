@@ -2,8 +2,8 @@ package lazycoder21.droid.crypto.presentation.crypto_listings.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import lazycoder21.droid.crypto.databinding.RvItemCryptoListingItemBinding
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
@@ -14,7 +14,7 @@ import lazycoder21.droid.crypto.utils.updatePriceChange
 class CryptoListingAdapter(
     private val onItemClick: (CryptoDetail) -> Unit,
     private val itemFavourite: (CryptoDetail) -> Unit,
-) : ListAdapter<CryptoDetail, CryptoListingAdapter.ViewHolder>(DiffCallback()) {
+) : PagedListAdapter<CryptoDetail, CryptoListingAdapter.ViewHolder>(diffCallback) {
 
     inner class ViewHolder(private val binding: RvItemCryptoListingItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -44,16 +44,18 @@ class CryptoListingAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        getItem(position)?.let { holder.bind(it) }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<CryptoDetail>() {
-        override fun areItemsTheSame(oldItem: CryptoDetail, newItem: CryptoDetail): Boolean {
-            return oldItem.symbol == newItem.symbol
-        }
+    companion object {
+        private val diffCallback = object : DiffUtil.ItemCallback<CryptoDetail>() {
+            override fun areItemsTheSame(oldItem: CryptoDetail, newItem: CryptoDetail): Boolean {
+                return oldItem.symbol == newItem.symbol
+            }
 
-        override fun areContentsTheSame(oldItem: CryptoDetail, newItem: CryptoDetail): Boolean {
-            return oldItem == newItem
+            override fun areContentsTheSame(oldItem: CryptoDetail, newItem: CryptoDetail): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 

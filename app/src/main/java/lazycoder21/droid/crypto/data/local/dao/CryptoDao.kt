@@ -1,6 +1,7 @@
 package lazycoder21.droid.crypto.data.local.dao
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import lazycoder21.droid.crypto.data.local.entity.CryptoDetailLocal
 import lazycoder21.droid.crypto.data.local.entity.CryptoDetailPartial
@@ -27,7 +28,7 @@ interface CryptoDao {
         symbol: String = "",
         sortOrder: Int = SortOrder.ASCENDING,
         sortOption: Int = SortOptions.ALPHABETIC
-    ): LiveData<List<CryptoDetailLocal>>
+    ): DataSource.Factory<Int, CryptoDetailLocal>
 
     @Query(
         value = """
@@ -45,7 +46,7 @@ interface CryptoDao {
         symbol: String = "",
         sortOrder: Int = SortOrder.ASCENDING,
         sortOption: Int = SortOptions.ALPHABETIC
-    ): LiveData<List<CryptoDetailLocal>>
+    ): DataSource.Factory<Int, CryptoDetailLocal>
 
 
     @Query(

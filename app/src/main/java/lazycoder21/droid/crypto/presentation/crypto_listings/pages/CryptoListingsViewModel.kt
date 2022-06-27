@@ -1,11 +1,13 @@
-package lazycoder21.droid.crypto.presentation.crypto_listings
+package lazycoder21.droid.crypto.presentation.crypto_listings.pages
 
 import androidx.lifecycle.*
+import androidx.paging.PagedList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
 import lazycoder21.droid.crypto.domain.model.Filter
 import lazycoder21.droid.crypto.domain.repository.CryptoRepository
+import lazycoder21.droid.crypto.presentation.crypto_listings.utils.Paging
 import lazycoder21.droid.crypto.utils.CryptoFilter
 import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOptions
 import lazycoder21.droid.crypto.utils.CryptoSortingUtils.SortOrder
@@ -52,17 +54,19 @@ class CryptoListingsViewModel @Inject constructor(
     private fun fetchCryptoListings(
         filter: CryptoFilter,
         params: Filter
-    ): LiveData<List<CryptoDetail>> {
+    ): LiveData<PagedList<CryptoDetail>> {
         return when (filter) {
             CryptoFilter.All -> cryptoRepository.getCryptoListings(
                 symbol = params.searchQuery,
                 sortOrder = params.sortOrder,
-                sortOption = params.sortOption
+                sortOption = params.sortOption,
+                config = Paging.config
             )
             CryptoFilter.Favourite -> cryptoRepository.getFavouriteCryptoListings(
                 symbol = params.searchQuery,
                 sortOrder = params.sortOrder,
-                sortOption = params.sortOption
+                sortOption = params.sortOption,
+                config = Paging.config
             )
         }
     }

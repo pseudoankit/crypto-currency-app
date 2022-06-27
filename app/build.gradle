@@ -37,6 +37,9 @@ android {
 }
 
 dependencies {
+    //paging
+    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
+
     implementation 'com.jjoe64:graphview:4.2.2'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01'
     implementation 'com.github.lazycoder-21:FontAwesomeLibrary:v1.2'

@@ -1,10 +1,11 @@
-package lazycoder21.droid.crypto.presentation.crypto_listings
+package lazycoder21.droid.crypto.presentation.crypto_listings.pages
 
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
 import lazycoder21.droid.crypto.R
 import lazycoder21.droid.crypto.databinding.FragmentCryptoListingBaseBinding
 import lazycoder21.droid.crypto.domain.model.CryptoDetail
@@ -78,11 +79,10 @@ abstract class CryptoListingsBaseFragment(
     override fun inflateLayout(layoutInflater: LayoutInflater) =
         FragmentCryptoListingBaseBinding.inflate(layoutInflater)
 
-    private var lastObservedLiveData: LiveData<List<CryptoDetail>>? = null
+    private var lastObservedLiveData: LiveData<PagedList<CryptoDetail>>? = null
     private fun updateListing() {
         lastObservedLiveData?.removeObservers(viewLifecycleOwner)
         lastObservedLiveData = viewModel.cryptoListing(filter = filter).apply {
-            removeObservers(viewLifecycleOwner)
             observe(viewLifecycleOwner) {
                 adapter.submitList(it)
             }

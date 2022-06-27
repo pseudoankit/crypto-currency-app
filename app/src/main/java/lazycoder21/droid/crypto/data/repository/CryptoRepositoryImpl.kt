@@ -1,8 +1,9 @@
 package lazycoder21.droid.crypto.data.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import lazycoder21.droid.crypto.data.local.LocalDataBase
 import lazycoder21.droid.crypto.data.mapper.CryptoListingMapper.mapRemoteToLocal
 import lazycoder21.droid.crypto.data.mapper.CryptoListingMapper.mapToDomain
@@ -15,6 +16,7 @@ import lazycoder21.droid.crypto.utils.Utils.safeApiCall
 import javax.inject.Inject
 import javax.inject.Singleton
 
+
 @Singleton
 class CryptoRepositoryImpl @Inject constructor(
     db: LocalDataBase,
@@ -26,10 +28,13 @@ class CryptoRepositoryImpl @Inject constructor(
     override fun getCryptoListings(
         symbol: String,
         @SortOrder sortOrder: Int,
-        @SortOptions sortOption: Int
-    ): LiveData<List<CryptoDetail>> {
-        return dao.getListings(symbol = symbol, sortOrder = sortOrder, sortOption = sortOption)
-            .map { it.mapToDomain }
+        @SortOptions sortOption: Int,
+        config: PagedList.Config
+    ): LiveData<PagedList<CryptoDetail>> {
+        val cryptos =
+            dao.getListings(symbol = symbol, sortOrder = sortOrder, sortOption = sortOption)
+                .map { it.mapToDomain }
+        return LivePagedListBuilder(cryptos, config).build()
     }
 
     override fun getCryptoDetail(symbol: String): LiveData<CryptoDetail> {
@@ -55,12 +60,13 @@ class CryptoRepositoryImpl @Inject constructor(
         symbol: String,
         sortOrder: Int,
         sortOption: Int,
-    ): LiveData<List<CryptoDetail>> {
-        Log.d("TAG", "getFavouriteCryptoListings: option:$sortOption , order: $sortOrder")
-        return dao.getFavouriteListings(
+        config: PagedList.Config,
+    ): LiveData<PagedList<CryptoDetail>> {
+        val cryptos = dao.getFavouriteListings(
             symbol = symbol,
             sortOrder = sortOrder,
             sortOption = sortOption,
         ).map { it.mapToDomain }
+        return LivePagedListBuilder(cryptos, config).build()
     }
 }
